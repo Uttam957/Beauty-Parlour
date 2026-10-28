@@ -1,0 +1,287 @@
+/* styles/about.css */
+/* Styles for the About Us page (pages/about.js) */
+
+/* Story Section */
+.story-content {
+  max-width: 800px;
+  margin: 0 auto;
+  font-size: 1.05rem;
+  line-height: 1.8;
+}
+
+.story-content p {
+  margin-bottom: 24px;
+}
+
+/* Founder Note Section */
+.founder-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 48px;
+  align-items: center;
+}
+
+@media (min-width: 992px) {
+  .founder-grid {
+    grid-template-columns: 1fr 1.3fr;
+    gap: 64px;
+  }
+}
+
+.founder-image-wrap {
+  position: relative;
+  max-width: 420px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.founder-gold-frame {
+  position: absolute;
+  inset: 0;
+  border: 2px solid var(--gold);
+  border-radius: var(--radius-lg);
+  transform: translate(16px, 16px);
+  z-index: 0;
+  pointer-events: none;
+}
+
+.founder-image-box {
+  position: relative;
+  z-index: 1;
+  aspect-ratio: 640 / 1024;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+}
+
+.founder-quote-box {
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  padding: 40px 36px;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-card);
+  position: relative;
+}
+
+.founder-quote-mark {
+  font-family: var(--font-serif);
+  font-size: 4rem;
+  color: var(--gold);
+  line-height: 0.8;
+  margin-bottom: 16px;
+}
+
+.founder-quote-text {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 1.35rem;
+  color: var(--plum);
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+.founder-author {
+  font-weight: 600;
+  color: var(--rose);
+  font-size: 1.05rem;
+}
+
+/* Vision and Mission */
+.vm-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 32px;
+}
+
+@media (min-width: 768px) {
+  .vm-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.vm-card {
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-card);
+  display: flex;
+  flex-direction: column;
+}
+
+.vm-image-wrap {
+  aspect-ratio: 4 / 3;
+}
+
+.vm-body {
+  padding: 36px 32px;
+}
+
+.vm-body h3 {
+  font-size: 1.45rem;
+  margin-bottom: 12px;
+  color: var(--plum);
+}
+
+.vm-body p {
+  color: var(--muted);
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+/* Values Table & Cards */
+.values-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+}
+
+@media (min-width: 640px) {
+  .values-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .values-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.value-card {
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  padding: 32px 28px;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-card);
+  transition: var(--transition-smooth);
+}
+
+.value-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-hover);
+}
+
+.value-card .icon-circle {
+  margin-bottom: 20px;
+}
+
+.value-card h3 {
+  font-size: 1.25rem;
+  margin-bottom: 10px;
+}
+
+.value-card p {
+  color: var(--muted);
+  font-size: 0.95rem;
+  margin-bottom: 0;
+}
+
+/* Team Grid */
+.team-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 28px;
+}
+
+@media (min-width: 640px) {
+  .team-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .team-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.team-card {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+  transition: var(--transition-smooth);
+}
+
+.team-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-hover);
+}
+
+.team-card .image-placeholder {
+  height: 100%;
+  border-radius: 0;
+  border: none;
+}
+
+.team-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(180deg, transparent 0%, rgba(29, 23, 18, 0.95) 100%);
+  padding: 32px 20px 20px 20px;
+  color: var(--white);
+  z-index: 2;
+}
+
+.team-name {
+  font-family: var(--font-serif);
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.team-role {
+  color: var(--gold);
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+/* Hygiene Promise Checklist */
+.hygiene-card {
+  background: var(--white);
+  border-radius: var(--radius-xl);
+  padding: 48px 36px;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-card);
+  max-width: 920px;
+  margin: 0 auto;
+}
+
+.hygiene-list {
+  list-style: none;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+}
+
+@media (min-width: 768px) {
+  .hygiene-list {
+    grid-template-columns: 1fr 1fr;
+    gap: 24px 36px;
+  }
+}
+
+.hygiene-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  font-size: 1rem;
+  color: var(--text);
+}
+
+.hygiene-item .icon-circle {
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+}
+
+.hygiene-item .icon-circle svg {
+  width: 20px;
+  height: 20px;
+}

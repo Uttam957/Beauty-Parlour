@@ -1,0 +1,435 @@
+/* styles/service-page.css */
+/* Shared Styles for All 6 Service Detail Pages:
+   /services/makeup, /services/facial, /services/hair,
+   /services/hair-removal, /services/massage, /services/mani-pedi */
+
+/* Service Intro (Two columns) */
+.service-intro-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 48px;
+  align-items: center;
+}
+
+@media (min-width: 992px) {
+  .service-intro-grid {
+    grid-template-columns: 1.2fr 1fr;
+    gap: 64px;
+  }
+}
+
+.service-intro-text p {
+  font-size: 1.05rem;
+  line-height: 1.8;
+  margin-bottom: 20px;
+}
+
+.service-intro-media {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+  border: 1px solid var(--border);
+}
+
+.service-intro-media .image-placeholder {
+  height: 100%;
+  border-radius: 0;
+  border: none;
+}
+
+/* Occasion / Service Blocks */
+.occasions-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 28px;
+}
+
+@media (min-width: 640px) {
+  .occasions-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .occasions-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.occasion-card {
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-card);
+  transition: var(--transition-smooth);
+  display: flex;
+  flex-direction: column;
+}
+
+.occasion-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-hover);
+}
+
+.occasion-media {
+  aspect-ratio: 1 / 1;
+  background-color: var(--blush);
+  overflow: hidden;
+}
+
+.occasion-media .image-placeholder {
+  height: 100%;
+  border-radius: 0;
+  border: none;
+}
+
+.occasion-body {
+  padding: 28px 24px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.occasion-body h3 {
+  font-size: 1.3rem;
+  color: var(--plum);
+  margin-bottom: 10px;
+}
+
+.occasion-body p {
+  color: var(--muted);
+  font-size: 0.95rem;
+  line-height: 1.65;
+  margin-bottom: 0;
+}
+
+/* Numbered Process Timeline (5 steps with connecting line) */
+.process-timeline {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+  position: relative;
+}
+
+@media (min-width: 992px) {
+  .process-timeline {
+    grid-template-columns: repeat(5, 1fr);
+    gap: 20px;
+  }
+  .process-timeline::before {
+    content: '';
+    position: absolute;
+    top: 36px;
+    left: 8%;
+    right: 8%;
+    height: 2px;
+    background-color: var(--gold);
+    z-index: 0;
+  }
+}
+
+.process-step-card {
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  padding: 32px 20px 24px 20px;
+  text-align: center;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-card);
+  position: relative;
+  z-index: 1;
+}
+
+.process-step-num {
+  width: 56px;
+  height: 56px;
+  border-radius: var(--radius-full);
+  background: var(--rose);
+  color: var(--white);
+  font-family: var(--font-serif);
+  font-size: 1.5rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px auto;
+  border: 4px solid var(--white);
+  box-shadow: 0 4px 12px rgba(196, 154, 60, 0.35);
+}
+
+.process-step-card h4 {
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  color: var(--plum);
+  margin-bottom: 8px;
+}
+
+.process-step-card p {
+  font-size: 0.88rem;
+  color: var(--muted);
+  line-height: 1.55;
+  margin-bottom: 0;
+}
+
+/* Premium Responsive Price Table */
+.price-table-container {
+  max-width: 920px;
+  margin: 0 auto;
+  background: var(--white);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+  border: 1px solid var(--border);
+}
+
+.price-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.price-table thead th {
+  background-color: var(--plum);
+  color: var(--white);
+  font-family: var(--font-serif);
+  font-size: 1.1rem;
+  padding: 18px 24px;
+  font-weight: 600;
+  border-bottom: 3px solid var(--gold);
+}
+
+.price-table th.price-col,
+.price-table td.price-col {
+  text-align: right;
+}
+
+.price-table tbody tr {
+  border-bottom: 1px solid var(--border-light);
+  transition: background-color 0.2s ease;
+}
+
+.price-table tbody tr:nth-child(even) {
+  background-color: var(--ivory);
+}
+
+.price-table tbody tr:hover {
+  background-color: #F8F1F4;
+}
+
+.price-table td {
+  padding: 16px 24px;
+  font-size: 0.95rem;
+  color: var(--text);
+}
+
+.price-table td.service-name {
+  font-weight: 500;
+  color: var(--plum);
+}
+
+.price-table td.price-col {
+  font-weight: 700;
+  color: var(--rose);
+  font-size: 1.05rem;
+}
+
+.price-group-header td {
+  background-color: var(--blush) !important;
+  color: var(--plum) !important;
+  font-family: var(--font-serif);
+  font-weight: 700;
+  font-size: 1.05rem;
+  padding: 12px 24px;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.price-note {
+  padding: 16px 24px;
+  font-size: 0.85rem;
+  color: var(--muted);
+  font-style: italic;
+  background-color: var(--ivory);
+  border-top: 1px dashed var(--border);
+  text-align: center;
+}
+
+/* Mobile Responsive Cards for Tables */
+@media (max-width: 639px) {
+  .price-table thead {
+    display: none;
+  }
+  .price-table,
+  .price-table tbody,
+  .price-table tr,
+  .price-table td {
+    display: block;
+    width: 100%;
+  }
+  .price-table tr:not(.price-group-header) {
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--border-light);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .price-table td {
+    padding: 0;
+  }
+  .price-table td.service-name {
+    flex-grow: 1;
+    padding-right: 16px;
+  }
+  .price-group-header td {
+    padding: 10px 20px;
+  }
+}
+
+/* Tips and Checklist */
+.checklist-card {
+  background: var(--white);
+  border-radius: var(--radius-xl);
+  padding: 40px 32px;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-card);
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.tips-grid {
+  list-style: none;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+}
+
+@media (min-width: 768px) {
+  .tips-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 24px 32px;
+  }
+}
+
+.tip-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  font-size: 0.98rem;
+  color: var(--text);
+  line-height: 1.6;
+}
+
+.tip-item svg {
+  width: 20px;
+  height: 20px;
+  stroke: var(--rose);
+  flex-shrink: 0;
+  margin-top: 3px;
+}
+
+/* Visible Notice Box (Massage / Sensitive skin) */
+.notice-box {
+  background-color: var(--blush);
+  border-left: 4px solid var(--rose);
+  border-radius: var(--radius-lg);
+  padding: 24px 28px;
+  margin: 36px auto;
+  max-width: 880px;
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+.notice-icon {
+  width: 28px;
+  height: 28px;
+  stroke: var(--rose);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.notice-content h4 {
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  color: var(--plum);
+  margin-bottom: 6px;
+}
+
+.notice-content p {
+  color: var(--text);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin-bottom: 0;
+}
+
+/* Service Enquiry Form Section */
+.service-form-wrapper {
+  max-width: 680px;
+  margin: 0 auto;
+  background: var(--white);
+  border-radius: var(--radius-xl);
+  padding: 44px 36px;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-card);
+}
+
+@media (max-width: 576px) {
+  .service-form-wrapper {
+    padding: 32px 20px;
+  }
+}
+
+/* Work Gallery Grid inside Service pages */
+.service-work-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  margin-top: 36px;
+}
+
+@media (min-width: 768px) {
+  .service-work-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .service-work-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+  }
+}
+
+.service-work-item {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+  transition: var(--transition-smooth);
+}
+
+.service-work-item:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-hover);
+}
+
+.service-work-item .image-placeholder {
+  height: 100%;
+  border-radius: 0;
+  border: none;
+}
+
+/* Skin Type & Comparison Tables */
+.custom-table-card {
+  max-width: 900px;
+  margin: 0 auto;
+  background: var(--white);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-card);
+}

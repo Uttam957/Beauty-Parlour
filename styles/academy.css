@@ -1,0 +1,163 @@
+/* styles/academy.css */
+/* Styles for Beauty Academy Page (pages/academy.js) */
+
+/* Course Cards Grid */
+.courses-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 32px;
+  margin-bottom: 72px;
+}
+
+@media (min-width: 768px) {
+  .courses-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .courses-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.course-card {
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  transition: var(--transition-smooth);
+}
+
+.course-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-hover);
+}
+
+.course-top-strip {
+  height: 6px;
+  background: linear-gradient(90deg, var(--rose) 0%, var(--gold) 100%);
+}
+
+.course-card-body {
+  padding: 32px 28px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.course-header-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.course-title {
+  font-family: var(--font-serif);
+  font-size: 1.35rem;
+  color: var(--plum);
+  line-height: 1.25;
+}
+
+.course-duration-badge {
+  background-color: var(--gold-light);
+  color: var(--plum);
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+  white-space: nowrap;
+}
+
+.course-fee {
+  font-family: var(--font-serif);
+  font-size: 1.65rem;
+  font-weight: 700;
+  color: var(--rose);
+  margin-bottom: 20px;
+  padding-bottom: 16px;
+  border-bottom: 1px dashed var(--border);
+}
+
+.course-learn-title {
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--muted);
+  margin-bottom: 12px;
+}
+
+.course-learn-text {
+  font-size: 0.95rem;
+  color: var(--text);
+  line-height: 1.6;
+  margin-bottom: 28px;
+  flex-grow: 1;
+}
+
+/* Who Can Join Box */
+.eligibility-box {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 32px;
+  text-align: center;
+  max-width: 760px;
+  margin: 0 auto 56px auto;
+  box-shadow: var(--shadow-card);
+}
+
+.eligibility-box h3 {
+  font-size: 1.35rem;
+  margin-bottom: 12px;
+  color: var(--plum);
+}
+
+.eligibility-box p {
+  color: var(--muted);
+  font-size: 1.05rem;
+  margin-bottom: 0;
+}
+
+/* Student Results Grid */
+.results-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  margin-bottom: 56px;
+}
+
+@media (min-width: 768px) {
+  .results-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+}
+
+.result-card {
+  aspect-ratio: 1 / 1;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+  transition: var(--transition-smooth);
+}
+
+.result-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-hover);
+}
+
+.result-card .image-placeholder {
+  height: 100%;
+  border-radius: 0;
+  border: none;
+}

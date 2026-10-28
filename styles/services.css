@@ -1,0 +1,120 @@
+/* styles/services.css */
+/* Styles for Services Overview Page (pages/services/index.js) */
+
+.services-intro-box {
+  max-width: 820px;
+  margin: 0 auto 56px auto;
+  text-align: center;
+  font-size: 1.15rem;
+  line-height: 1.8;
+  color: var(--text);
+}
+
+/* Category Cards Grid */
+.overview-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 32px;
+  margin-bottom: 72px;
+}
+
+@media (min-width: 640px) {
+  .overview-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .overview-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 36px;
+  }
+}
+
+.overview-card {
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-card);
+  transition: var(--transition-smooth);
+  display: flex;
+  flex-direction: column;
+}
+
+.overview-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-hover);
+}
+
+.overview-card-media {
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background-color: var(--blush);
+}
+
+.overview-card-media .image-placeholder {
+  height: 100%;
+  border-radius: 0;
+  border: none;
+  transition: transform 0.4s ease;
+}
+
+.overview-card:hover .overview-card-media .image-placeholder {
+  transform: scale(1.06);
+}
+
+.overview-card-content {
+  padding: 32px 28px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.overview-card-content h3 {
+  font-size: 1.4rem;
+  margin-bottom: 12px;
+  color: var(--plum);
+}
+
+.overview-card-content p {
+  color: var(--muted);
+  font-size: 0.95rem;
+  line-height: 1.65;
+  margin-bottom: 24px;
+  flex-grow: 1;
+}
+
+/* Why Book With Us Bar */
+.why-book-row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+  margin-top: 24px;
+}
+
+@media (min-width: 768px) {
+  .why-book-row {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.why-book-item {
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  padding: 32px 24px;
+  text-align: center;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-card);
+}
+
+.why-book-item .icon-circle {
+  margin: 0 auto 16px auto;
+}
+
+.why-book-item h4 {
+  font-family: var(--font-serif);
+  font-size: 1.25rem;
+  color: var(--plum);
+  margin-bottom: 8px;
+}

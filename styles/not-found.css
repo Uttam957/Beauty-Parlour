@@ -1,0 +1,75 @@
+/* styles/not-found.css */
+/* Styles for 404 Not Found Page (pages/404.js) */
+
+.not-found-container {
+  min-height: 70vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 64px 20px;
+  text-align: center;
+}
+
+.not-found-card {
+  background: var(--white);
+  border-radius: var(--radius-xl);
+  padding: 64px 32px;
+  max-width: 680px;
+  width: 100%;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-card);
+}
+
+.not-found-num {
+  font-family: var(--font-serif);
+  font-size: clamp(5rem, 12vw, 8rem);
+  font-weight: 700;
+  color: var(--gold);
+  line-height: 1;
+  margin-bottom: 12px;
+}
+
+.not-found-card h1 {
+  font-size: clamp(1.8rem, 4vw, 2.4rem);
+  color: var(--plum);
+  margin-bottom: 16px;
+}
+
+.not-found-card p {
+  color: var(--muted);
+  font-size: 1.05rem;
+  max-width: 500px;
+  margin: 0 auto 32px auto;
+}
+
+.not-found-services-title {
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+  margin-top: 40px;
+  margin-bottom: 16px;
+}
+
+.not-found-chips {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.not-found-chip {
+  padding: 8px 16px;
+  background-color: var(--blush);
+  color: var(--plum);
+  border-radius: var(--radius-full);
+  font-size: 0.85rem;
+  font-weight: 500;
+  transition: var(--transition-smooth);
+}
+
+.not-found-chip:hover {
+  background-color: var(--rose);
+  color: var(--white);
+}
