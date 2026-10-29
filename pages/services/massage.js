@@ -86,7 +86,7 @@ export default function MassagePage() {
       {/* SECTION 2: INTRODUCTION */}
       <section className="section-padding bg-ivory">
         <div className="container">
-          <div className="services-intro-box">
+          <div className="services-intro-box reveal reveal-up">
             A good massage is more than a luxury. It helps you relax, improves comfort and gives you a peaceful break
             from a busy routine. Our therapists use gentle, steady techniques and quality oils, with pressure adjusted
             to your comfort.
@@ -103,25 +103,21 @@ export default function MassagePage() {
             <div className="section-divider" />
           </div>
 
-          <div className="price-table-container">
-            <table className="price-table">
-              <thead>
-                <tr>
-                  <th>Service</th>
-                  <th>Duration</th>
-                  <th className="price-col">Price</th>
-                </tr>
-              </thead>
-              <tbody>
-                {massagePrices.map((row, idx) => (
-                  <tr key={idx}>
-                    <td className="service-name">{row.service}</td>
-                    <td style={{ color: 'var(--muted)', fontWeight: 500 }}>{row.duration}</td>
-                    <td className="price-col">{row.price}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+          <div className="menu-price-container reveal reveal-up">
+            <div className="menu-price-list">
+              {massagePrices.map((row, idx) => (
+                <div key={idx} className="menu-price-item">
+                  <div className="menu-price-header">
+                    <span className="menu-price-name">
+                      {row.service}
+                      <span className="menu-price-badge">{row.duration}</span>
+                    </span>
+                    <span className="menu-price-dots" />
+                    <span className="menu-price-val">{row.price}</span>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
@@ -135,17 +131,16 @@ export default function MassagePage() {
             <div className="section-divider" />
           </div>
 
-          <div className="checklist-card">
-            <ul className="tips-grid">
-              {massageBenefits.map((benefit, idx) => (
-                <li key={idx} className="tip-item">
-                  <div className="icon-circle" style={{ width: '36px', height: '36px' }}>
-                    <svg viewBox="0 0 24 24" fill="none" strokeWidth="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-                  </div>
-                  <span>{benefit}</span>
-                </li>
-              ))}
-            </ul>
+          <div className="icon-feature-row cols-4 reveal reveal-up">
+            {massageBenefits.map((benefit, idx) => (
+              <div key={idx} className="icon-feature-item">
+                <div className="icon-circle">
+                  <svg viewBox="0 0 24 24" fill="none" strokeWidth="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                </div>
+                <h4>Wellness 0{idx + 1}</h4>
+                <p>{benefit}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -153,15 +148,12 @@ export default function MassagePage() {
       {/* SECTION 5: PLEASE NOTE */}
       <section className="section-padding bg-ivory" style={{ paddingTop: 0 }}>
         <div className="container">
-          <div className="notice-box">
-            <svg className="notice-icon" viewBox="0 0 24 24" fill="none" strokeWidth="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
-            <div className="notice-content">
-              <h4>Please Note</h4>
-              <p>
-                Massage here is for relaxation and personal care, not medical treatment. If you have an injury,
-                pregnancy, skin infection or health condition, please tell us first and check with your doctor.
-              </p>
-            </div>
+          <div className="highlight-strip reveal reveal-up">
+            <h3>Therapeutic Guidelines & Client Notice</h3>
+            <p>
+              Massage here is for relaxation and personal care, not medical treatment. If you have an injury,
+              pregnancy, skin infection or health condition, please tell us first and check with your doctor.
+            </p>
           </div>
         </div>
       </section>
@@ -175,7 +167,7 @@ export default function MassagePage() {
             <div className="section-divider" />
           </div>
 
-          <div className="faq-list">
+          <div className="faq-list reveal reveal-up">
             {massageFaqs.map((faq, idx) => {
               const isOpen = openFaq === idx;
               return (
@@ -203,7 +195,7 @@ export default function MassagePage() {
       </section>
 
       {/* SECTION 7: CALL TO ACTION */}
-      <section className="cta-band">
+      <section className="cta-band reveal reveal-up">
         <div className="container">
           <div className="cta-band-content">
             <h2>Take Time to Unwind and Relax</h2>

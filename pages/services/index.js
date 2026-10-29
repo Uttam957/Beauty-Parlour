@@ -94,21 +94,21 @@ export default function ServicesPage() {
         </div>
       </div>
 
-      {/* SECTION 2: INTRO */}
+      {/* SECTION 2: INTRO (EDITORIAL LEAD TEXT STRIP) */}
       <section className="section-padding bg-ivory">
         <div className="container">
-          <div className="services-intro-box">
+          <div className="services-intro-box reveal reveal-up">
             Whether you are preparing for a wedding, attending a party or simply taking time for yourself,{' '}
             {siteConfig.rawName} has a service for you. Our team of experienced beauticians works by appointment so you
             are never rushed. Choose a category below to see what we offer and the prices.
           </div>
 
-          {/* SECTION 3: SERVICE CATEGORIES */}
-          <div className="overview-grid">
+          {/* SECTION 3: SERVICE CATEGORIES (VISUAL SERVICE CARDS - THE ONE CARD GRID ON THIS PAGE) */}
+          <div className="overview-grid reveal reveal-stagger">
             {serviceCategories.map((cat, idx) => (
               <div key={idx} className="overview-card">
                 <div className="overview-card-media">
-                  {/* IMAGE: One image per category card (same images as the home page service cards): makeup, hair, facial, hair removal, massage, mani-pedi */}
+                  {/* IMAGE: One image per category card */}
                   <div className="image-placeholder">
                     <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
                     <span className="placeholder-label">Add service image</span>
@@ -128,16 +128,16 @@ export default function ServicesPage() {
             ))}
           </div>
 
-          {/* SECTION 4: WHY BOOK WITH US */}
-          <div className="section-header" style={{ marginBottom: '32px' }}>
+          {/* SECTION 4: WHY BOOK WITH US (ICON ROW WITH THIN DIVIDERS) */}
+          <div className="section-header reveal reveal-up" style={{ marginBottom: '32px' }}>
             <span className="section-eyebrow">The Salon Standard</span>
             <h2 className="section-title">Why Book With Us</h2>
             <div className="section-divider" />
           </div>
 
-          <div className="why-book-row">
+          <div className="icon-feature-row cols-3 reveal reveal-up">
             {whyBookPoints.map((item, idx) => (
-              <div key={idx} className="why-book-item">
+              <div key={idx} className="icon-feature-item">
                 <div className="icon-circle">{item.icon}</div>
                 <h4>{item.title}</h4>
                 <p className="muted" style={{ fontSize: '0.925rem', marginBottom: 0 }}>
@@ -149,8 +149,8 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      {/* SECTION 5: CALL TO ACTION */}
-      <section className="cta-band">
+      {/* SECTION 5: CALL TO ACTION (FULL-WIDTH BANNER STRIP) */}
+      <section className="cta-band reveal reveal-up">
         <div className="container">
           <div className="cta-band-content">
             <h2>Not sure which service is right for you?</h2>

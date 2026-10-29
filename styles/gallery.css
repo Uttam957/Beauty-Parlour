@@ -66,6 +66,17 @@
   background-color: var(--blush);
 }
 
+.masonry-showcase .gallery-item {
+  break-inside: avoid;
+  margin-bottom: 24px;
+  display: block;
+}
+
+.masonry-showcase .gallery-item:nth-child(3n+1) { aspect-ratio: 4 / 5; }
+.masonry-showcase .gallery-item:nth-child(3n+2) { aspect-ratio: 1 / 1; }
+.masonry-showcase .gallery-item:nth-child(3n+3) { aspect-ratio: 3 / 4; }
+
+
 .gallery-item .image-placeholder {
   height: 100%;
   border-radius: 0;

@@ -131,16 +131,16 @@ export default function AboutPage() {
         </div>
       </div>
 
-      {/* SECTION 2: OUR STORY */}
+      {/* SECTION 2: OUR STORY (EDITORIAL NARRATIVE SPLIT) */}
       <section className="section-padding bg-ivory">
         <div className="container">
-          <div className="section-header">
+          <div className="section-header reveal reveal-up">
             <span className="section-eyebrow">Our Journey</span>
             <h2 className="section-title">Our Story</h2>
             <div className="section-divider" />
           </div>
 
-          <div className="story-content">
+          <div className="story-content reveal reveal-up" style={{ maxWidth: '840px', margin: '0 auto', fontSize: '1.05rem', lineHeight: '1.8' }}>
             <p>
               {siteConfig.rawName} began with a simple idea: every woman deserves a beauty experience that feels
               personal, safe and unhurried. What started as a small studio has grown into a full-service parlour trusted
@@ -155,12 +155,12 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* SECTION 3: MEET THE FOUNDER */}
+      {/* SECTION 3: MEET THE FOUNDER (ASYMMETRICAL IMAGE & BIO QUOTE SPOTLIGHT) */}
       <section className="section-padding bg-white">
         <div className="container">
           <div className="founder-grid">
             {/* Founder Photo */}
-            <div className="founder-image-wrap">
+            <div className="founder-image-wrap reveal reveal-left">
               <div className="founder-gold-frame" />
               <div className="founder-image-box">
                 {/* IMAGE: Founder portrait beside the note, size 640 x 1024 px (portrait) */}
@@ -168,6 +168,9 @@ export default function AboutPage() {
                   <img
                     src={siteConfig.logo}
                     alt={siteConfig.ownerName}
+                    loading="lazy"
+                    width="140"
+                    height="140"
                     style={{
                       width: '140px',
                       height: '140px',
@@ -187,7 +190,7 @@ export default function AboutPage() {
             </div>
 
             {/* Note & Highlighted Quote */}
-            <div className="founder-text-wrap">
+            <div className="founder-text-wrap reveal reveal-right">
               <div className="section-header text-left" style={{ marginBottom: '24px' }}>
                 <span className="section-eyebrow">Leadership</span>
                 <h2 className="section-title">A Note from Our Founder</h2>
@@ -213,19 +216,19 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* SECTION 4: VISION AND MISSION */}
+      {/* SECTION 4: VISION AND MISSION (ALTERNATING ZIG-ZAG ROWS) */}
       <section className="section-padding bg-blush">
         <div className="container">
-          <div className="section-header">
+          <div className="section-header reveal reveal-up">
             <span className="section-eyebrow">Guiding Principles</span>
             <h2 className="section-title">Vision and Mission</h2>
             <div className="section-divider" />
           </div>
 
-          <div className="vm-grid">
+          <div className="zigzag-showcase reveal reveal-up">
             {/* Our Vision */}
-            <div className="vm-card">
-              <div className="vm-image-wrap">
+            <div className="zigzag-row">
+              <div className="zigzag-media">
                 {/* IMAGE: One photo beside Our Vision, 800 x 600 px */}
                 <div className="image-placeholder" style={{ height: '100%' }}>
                   <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
@@ -233,7 +236,7 @@ export default function AboutPage() {
                   <span className="placeholder-dim">800 x 600 px</span>
                 </div>
               </div>
-              <div className="vm-body">
+              <div className="zigzag-text">
                 <h3>Our vision</h3>
                 <p>
                   To be the most trusted beauty destination for women in {siteConfig.city}, known for quality, hygiene and
@@ -243,8 +246,8 @@ export default function AboutPage() {
             </div>
 
             {/* Our Mission */}
-            <div className="vm-card">
-              <div className="vm-image-wrap">
+            <div className="zigzag-row">
+              <div className="zigzag-media">
                 {/* IMAGE: One photo beside Our Mission, 800 x 600 px */}
                 <div className="image-placeholder" style={{ height: '100%' }}>
                   <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
@@ -252,7 +255,7 @@ export default function AboutPage() {
                   <span className="placeholder-dim">800 x 600 px</span>
                 </div>
               </div>
-              <div className="vm-body">
+              <div className="zigzag-text">
                 <h3>Our mission</h3>
                 <p>
                   To deliver professional beauty services using skilled people, safe products and modern techniques, while
@@ -264,18 +267,18 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* SECTION 5: OUR VALUES */}
+      {/* SECTION 5: OUR VALUES (ICON ROW WITH THIN DIVIDERS) */}
       <section className="section-padding bg-ivory">
         <div className="container">
-          <div className="section-header">
+          <div className="section-header reveal reveal-up">
             <span className="section-eyebrow">What Drives Us</span>
             <h2 className="section-title">Our Values</h2>
             <div className="section-divider" />
           </div>
 
-          <div className="values-grid">
+          <div className="icon-feature-row cols-6 reveal reveal-up">
             {valuesData.map((val, idx) => (
-              <div key={idx} className="value-card">
+              <div key={idx} className="icon-feature-item">
                 <div className="icon-circle">{val.icon}</div>
                 <h3>{val.title}</h3>
                 <p>{val.desc}</p>
@@ -285,63 +288,59 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* SECTION 6: OUR TEAM */}
+      {/* SECTION 6: OUR TEAM (CIRCULAR PORTRAITS WITH NAMES & HOVER DETAILS) */}
       <section className="section-padding bg-white">
         <div className="container">
-          <div className="section-header">
+          <div className="section-header reveal reveal-up">
             <span className="section-eyebrow">Skilled Professionals</span>
             <h2 className="section-title">Meet Our Experts</h2>
             <div className="section-divider" />
           </div>
 
-          <div className="team-grid">
+          <div className="team-circular-grid reveal reveal-stagger">
             {teamData.map((member, idx) => (
-              <div key={idx} className="team-card">
-                {/* IMAGE: One portrait per team member, each 400 x 500 px */}
-                <div className="image-placeholder">
-                  <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-                  <span className="placeholder-label">Add team photo</span>
-                  <span className="placeholder-dim">400 x 500 px</span>
-                </div>
-                <div className="team-overlay">
-                  <div className="team-name">{member.name}</div>
-                  <div className="team-role">{member.role}</div>
-                  <div style={{ fontSize: '0.8rem', color: 'rgba(255,255,255,0.7)', marginTop: '4px' }}>
-                    {member.exp}
+              <div key={idx} className="team-circular-item">
+                <div className="team-circular-avatar">
+                  {/* IMAGE: One portrait per team member, each 400 x 500 px */}
+                  <div className="image-placeholder">
+                    <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                    <span className="placeholder-label">Add team photo</span>
+                    <span className="placeholder-dim">400 x 500 px</span>
                   </div>
                 </div>
+                <div className="team-circular-name">{member.name}</div>
+                <div className="team-circular-role">{member.role}</div>
+                <div className="team-circular-exp">{member.exp}</div>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* SECTION 7: OUR HYGIENE PROMISE */}
+      {/* SECTION 7: OUR HYGIENE PROMISE (2-COLUMN CLEAN CHECKLIST STRIP) */}
       <section className="section-padding bg-blush">
         <div className="container">
-          <div className="section-header">
+          <div className="section-header reveal reveal-up">
             <span className="section-eyebrow">Your Safety First</span>
             <h2 className="section-title">Our Hygiene Promise</h2>
             <div className="section-divider" />
           </div>
 
-          <div className="hygiene-card">
-            <ul className="hygiene-list">
-              {hygienePoints.map((point, idx) => (
-                <li key={idx} className="hygiene-item">
-                  <div className="icon-circle">
-                    <svg viewBox="0 0 24 24" fill="none" strokeWidth="2.5"><polyline points="20 6 9 17 4 12" /></svg>
-                  </div>
-                  <span>{point}</span>
-                </li>
-              ))}
-            </ul>
+          <div className="checklist-strip reveal reveal-up">
+            {hygienePoints.map((point, idx) => (
+              <div key={idx} className="checklist-strip-item">
+                <div className="icon-circle" style={{ width: '32px', height: '32px' }}>
+                  <svg viewBox="0 0 24 24" fill="none" strokeWidth="2.5"><polyline points="20 6 9 17 4 12" /></svg>
+                </div>
+                <span>{point}</span>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* SECTION 8: COUNTERS & CALL TO ACTION */}
-      <section className="counters-section" ref={countersRef}>
+      {/* SECTION 8: COUNTERS & CALL TO ACTION (HORIZONTAL STAT STRIP & ACTION) */}
+      <section className="counters-section reveal reveal-up" ref={countersRef}>
         <div className="container">
           <div className="counters-grid" style={{ marginBottom: '56px' }}>
             <div className="counter-item">

@@ -121,7 +121,7 @@ export default function HairPage() {
       {/* SECTION 2: INTRODUCTION */}
       <section className="section-padding bg-ivory">
         <div className="container">
-          <div className="services-intro-box">
+          <div className="services-intro-box reveal reveal-up">
             Your hair says a lot about your style. Our stylists suggest cuts, colours and treatments after checking
             your hair type, length, texture and daily routine, so the result looks good and is easy to manage at home.
           </div>
@@ -137,10 +137,17 @@ export default function HairPage() {
             <div className="section-divider" />
           </div>
 
-          <div className="occasions-grid">
+          <div className="zigzag-showcase reveal reveal-up">
             {hairServicesList.map((item, idx) => (
-              <div key={idx} className="occasion-card">
-                <div className="occasion-body">
+              <div key={idx} className="zigzag-row">
+                <div className="zigzag-media">
+                  <div className="image-placeholder" style={{ background: 'var(--blush)' }}>
+                    <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                    <span className="placeholder-label">{item.title}</span>
+                  </div>
+                </div>
+                <div className="zigzag-text">
+                  <span className="section-eyebrow">Service 0{idx + 1}</span>
                   <h3>{item.title}</h3>
                   <p>{item.desc}</p>
                 </div>
@@ -159,24 +166,19 @@ export default function HairPage() {
             <div className="section-divider" />
           </div>
 
-          <div className="price-table-container">
-            <table className="price-table">
-              <thead>
-                <tr>
-                  <th>Service</th>
-                  <th className="price-col">Price</th>
-                </tr>
-              </thead>
-              <tbody>
-                {hairPrices.map((item, idx) => (
-                  <tr key={idx}>
-                    <td className="service-name">{item.service}</td>
-                    <td className="price-col">{item.price}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-            <div className="price-note">
+          <div className="menu-price-container reveal reveal-up">
+            <div className="menu-price-list">
+              {hairPrices.map((item, idx) => (
+                <div key={idx} className="menu-price-item">
+                  <div className="menu-price-header">
+                    <span className="menu-price-name">{item.service}</span>
+                    <span className="menu-price-dots" />
+                    <span className="menu-price-val">{item.price}</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+            <div className="price-note" style={{ textAlign: 'center', marginTop: '24px' }}>
               Final colour and chemical treatment prices depend on hair length and thickness.
             </div>
           </div>
@@ -192,17 +194,16 @@ export default function HairPage() {
             <div className="section-divider" />
           </div>
 
-          <div className="checklist-card">
-            <ul className="tips-grid">
-              {hairTips.map((tip, idx) => (
-                <li key={idx} className="tip-item">
-                  <div className="icon-circle" style={{ width: '36px', height: '36px' }}>
-                    <svg viewBox="0 0 24 24" fill="none" strokeWidth="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-                  </div>
-                  <span>{tip}</span>
-                </li>
-              ))}
-            </ul>
+          <div className="icon-feature-row cols-4 reveal reveal-up">
+            {hairTips.map((tip, idx) => (
+              <div key={idx} className="icon-feature-item">
+                <div className="icon-circle">
+                  <svg viewBox="0 0 24 24" fill="none" strokeWidth="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                </div>
+                <h4>Tip 0{idx + 1}</h4>
+                <p>{tip}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -216,9 +217,9 @@ export default function HairPage() {
             <div className="section-divider" />
           </div>
 
-          <div className="service-work-grid">
+          <div className="masonry-showcase reveal reveal-stagger">
             {[...Array(8)].map((_, idx) => (
-              <div key={idx} className="service-work-item">
+              <div key={idx} className="masonry-item">
                 {/* IMAGE: 6 to 8 photos in a grid, each 768 x 960 px */}
                 <div className="image-placeholder">
                   <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
@@ -240,7 +241,7 @@ export default function HairPage() {
             <div className="section-divider" />
           </div>
 
-          <div className="faq-list">
+          <div className="faq-list reveal reveal-up">
             {hairFaqs.map((faq, idx) => {
               const isOpen = openFaq === idx;
               return (
@@ -268,7 +269,7 @@ export default function HairPage() {
       </section>
 
       {/* SECTION 8: CALL TO ACTION */}
-      <section className="cta-band">
+      <section className="cta-band reveal reveal-up">
         <div className="container">
           <div className="cta-band-content">
             <h2>Ready to Transform Your Hair?</h2>

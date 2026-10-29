@@ -28,6 +28,7 @@ const contactReviews = [
 ];
 
 export default function ContactPage() {
+  const [activeReview, setActiveReview] = useState(0);
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
@@ -38,6 +39,10 @@ export default function ContactPage() {
     message: '',
     website: '', // honeypot
   });
+
+  const nextReview = () => setActiveReview((prev) => (prev + 1) % contactReviews.length);
+  const prevReview = () => setActiveReview((prev) => (prev - 1 + contactReviews.length) % contactReviews.length);
+  const currentReview = contactReviews[activeReview];
 
   const [formErrors, setFormErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -137,10 +142,10 @@ export default function ContactPage() {
         </div>
       </div>
 
-      {/* SECTION 2 & 3: TWO COLUMNS (CONTACT INFO + BOOKING FORM) */}
+      {/* SECTION 2 & 3: REFINED SPLIT LAYOUT (CONTACT DETAILS LEFT + BOOKING FORM RIGHT) */}
       <section className="section-padding bg-ivory">
         <div className="container">
-          <div className="contact-layout-grid">
+          <div className="contact-layout-grid reveal reveal-up">
             {/* Left Column: Stacked Contact Details */}
             <div className="contact-info-list">
               <div className="section-header text-left" style={{ marginBottom: '24px' }}>
@@ -402,8 +407,8 @@ export default function ContactPage() {
             </div>
           </div>
 
-          {/* SECTION 4: GOOGLE MAP EMBED */}
-          <div className="map-container">
+          {/* SECTION 4: GOOGLE MAP EMBED (FULL-WIDTH MAP STRIP) */}
+          <div className="map-container reveal reveal-up">
             <div className="section-header">
               <span className="section-eyebrow">Find Our Parlour</span>
               <h2 className="section-title">Our Location</h2>
@@ -411,11 +416,14 @@ export default function ContactPage() {
             </div>
 
             <div className="map-frame-wrapper">
-              {/* GOOGLE MAP EMBED: Paste your Google Maps <iframe> code here */}
+              {/* GOOGLE MAP EMBED */}
               <div className="map-placeholder-box">
                 <img
                   src={siteConfig.logo}
                   alt={siteConfig.name}
+                  loading="lazy"
+                  width="88"
+                  height="88"
                   style={{
                     width: '88px',
                     height: '88px',
@@ -443,40 +451,66 @@ export default function ContactPage() {
             </div>
           </div>
 
-          {/* SECTION 5: WHAT OUR CLIENTS SAY */}
+          {/* SECTION 5: WHAT OUR CLIENTS SAY (LARGE QUOTE SPOTLIGHT + SCREENSHOT ROW) */}
           <div style={{ marginTop: '96px' }}>
-            <div className="section-header">
+            <div className="section-header reveal reveal-up">
               <span className="section-eyebrow">Client Feedback</span>
               <h2 className="section-title">What Our Clients Say</h2>
               <div className="section-divider" />
             </div>
 
-            {/* 3 Client Reviews */}
-            <div className="reviews-grid">
-              {contactReviews.map((review, idx) => (
-                <div key={idx} className="review-card">
-                  <div className="review-quote-icon">“</div>
-                  <p className="review-text">"{review.text}"</p>
-                  <div className="review-stars">
-                    {[...Array(5)].map((_, s) => (
-                      <svg key={s} viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-                    ))}
-                  </div>
-                  <div className="review-client">
-                    <div className="review-avatar-placeholder">
-                      {review.name.charAt(0)}
-                    </div>
-                    <div>
-                      <div className="review-client-name">{review.name}</div>
-                      <div className="review-client-service">{review.service}</div>
-                    </div>
-                  </div>
+            {/* Testimonial Quote Spotlight with Navigation */}
+            <div className="quote-spotlight reveal reveal-up" style={{ marginBottom: '48px' }}>
+              <div className="quote-spotlight-mark">“</div>
+              <p className="quote-spotlight-text">"{currentReview.text}"</p>
+              <div className="quote-spotlight-stars">
+                {[...Array(5)].map((_, s) => (
+                  <svg key={s} viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                ))}
+              </div>
+              <div className="quote-spotlight-author">
+                <div className="quote-spotlight-avatar">
+                  {currentReview.name.charAt(0)}
                 </div>
-              ))}
+                <div style={{ textAlign: 'left' }}>
+                  <div className="quote-spotlight-name">{currentReview.name}</div>
+                  <div className="quote-spotlight-service">{currentReview.service}</div>
+                </div>
+              </div>
+
+              <div className="quote-spotlight-controls">
+                <button
+                  type="button"
+                  className="quote-nav-btn"
+                  onClick={prevReview}
+                  aria-label="Previous review"
+                >
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="15 18 9 12 15 6"/></svg>
+                </button>
+                <div className="quote-dots">
+                  {contactReviews.map((_, idx) => (
+                    <button
+                      key={idx}
+                      type="button"
+                      className={`quote-dot ${activeReview === idx ? 'active' : ''}`}
+                      onClick={() => setActiveReview(idx)}
+                      aria-label={`Go to review ${idx + 1}`}
+                    />
+                  ))}
+                </div>
+                <button
+                  type="button"
+                  className="quote-nav-btn"
+                  onClick={nextReview}
+                  aria-label="Next review"
+                >
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="9 18 15 12 9 6"/></svg>
+                </button>
+              </div>
             </div>
 
             {/* 3 Review Screenshot Image Placeholders */}
-            <div className="review-screenshots-grid">
+            <div className="review-screenshots-grid reveal reveal-up">
               {[...Array(3)].map((_, idx) => (
                 <div key={idx} className="review-screenshot-card">
                   {/* IMAGE: 3 client review images under What Our Clients Say (each 500 x 300 px) */}
@@ -489,7 +523,7 @@ export default function ContactPage() {
               ))}
             </div>
 
-            <div style={{ textAlign: 'center', marginTop: '40px' }}>
+            <div style={{ textAlign: 'center', marginTop: '40px' }} className="reveal reveal-up">
               {/* LINK: Google reviews page link */}
               <a
                 href={siteConfig.googleReviewsUrl}

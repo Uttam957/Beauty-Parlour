@@ -101,11 +101,11 @@ export default function GalleryPage() {
         </div>
       </div>
 
-      {/* SECTION 2 & 3: FILTER TABS & RESPONSIVE GRID */}
+      {/* SECTION 2 & 3: FILTER TABS & MASONRY GRID */}
       <section className="section-padding bg-ivory">
         <div className="container">
           {/* Filter Tabs */}
-          <div className="gallery-filters">
+          <div className="gallery-filters reveal reveal-up">
             {filterCategories.map((cat) => (
               <button
                 key={cat}
@@ -118,8 +118,8 @@ export default function GalleryPage() {
             ))}
           </div>
 
-          {/* 24 Image Placeholder Grid */}
-          <div className="gallery-grid">
+          {/* 24 Image Placeholder Masonry Grid */}
+          <div className="masonry-showcase reveal reveal-stagger">
             {filteredItems.map((item, index) => (
               <div
                 key={item.id}
@@ -150,12 +150,20 @@ export default function GalleryPage() {
               </div>
             ))}
           </div>
+        </div>
+      </section>
 
-          {/* SECTION 5: BUTTON AT BOTTOM */}
-          <div style={{ textAlign: 'center' }}>
-            <Link href="/contact" className="btn btn-primary" style={{ padding: '16px 36px', fontSize: '1.05rem' }}>
-              Book Your Look
-            </Link>
+      {/* SECTION 4: FULL-WIDTH CTA STRIP */}
+      <section className="cta-band reveal reveal-up">
+        <div className="container">
+          <div className="cta-band-content">
+            <h2>Like What You See?</h2>
+            <p>Book your makeover or beauty treatment with our expert team today.</p>
+            <div className="cta-band-buttons">
+              <Link href="/contact" className="btn btn-primary" style={{ padding: '16px 36px', fontSize: '1.05rem', border: '2px solid var(--white)' }}>
+                Book Your Look
+              </Link>
+            </div>
           </div>
         </div>
       </section>

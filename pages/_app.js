@@ -52,6 +52,56 @@ export default function MyApp({ Component, pageProps }) {
     };
   }, [isMobileMenuOpen]);
 
+  // Site-wide Scroll Reveal Animation Observer
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+
+    // Mark HTML as JS-enabled for progressive enhancement
+    document.documentElement.classList.add('js');
+
+    // If IntersectionObserver is unavailable, immediately reveal all elements
+    if (!('IntersectionObserver' in window)) {
+      document.querySelectorAll('.reveal, .reveal-up, .reveal-left, .reveal-right, .reveal-stagger').forEach((el) => {
+        el.classList.add('is-revealed');
+      });
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-revealed');
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      {
+        threshold: 0.15,
+        rootMargin: '0px 0px -40px 0px',
+      }
+    );
+
+    // Give DOM a tick to paint on route change
+    const timer = setTimeout(() => {
+      const elements = document.querySelectorAll('.reveal, .reveal-up, .reveal-left, .reveal-right, .reveal-stagger');
+      elements.forEach((el) => {
+        // If element is already revealed or above viewport, mark revealed
+        const rect = el.getBoundingClientRect();
+        if (rect.top < window.innerHeight * 0.85 && rect.bottom > 0) {
+          el.classList.add('is-revealed');
+        } else {
+          observer.observe(el);
+        }
+      });
+    }, 60);
+
+    return () => {
+      clearTimeout(timer);
+      observer.disconnect();
+    };
+  }, [router.asPath]);
+
   const currentYear = new Date().getFullYear();
   const isServicesActive = router.pathname.startsWith('/services');
 

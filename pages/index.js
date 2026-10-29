@@ -198,7 +198,11 @@ export default function HomePage() {
   const [openFaq, setOpenFaq] = useState(null);
   const [counts, setCounts] = useState({ clients: 0, services: 0, brides: 0, years: 0 });
   const [hasAnimated, setHasAnimated] = useState(false);
+  const [activeReview, setActiveReview] = useState(0);
   const countersRef = useRef(null);
+
+  const nextReview = () => setActiveReview((prev) => (prev + 1) % reviewsList.length);
+  const prevReview = () => setActiveReview((prev) => (prev - 1 + reviewsList.length) % reviewsList.length);
 
   // Animated Count-up with IntersectionObserver
   useEffect(() => {
@@ -273,6 +277,8 @@ export default function HomePage() {
     })),
   };
 
+  const currentReview = reviewsList[activeReview];
+
   return (
     <>
       <Head>
@@ -294,7 +300,7 @@ export default function HomePage() {
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
       </Head>
 
-      {/* SECTION 1: HERO */}
+      {/* SECTION 1: HERO (FIRST SCREEN - IMMEDIATE LOAD, NO REVEAL DELAY) */}
       <section className="hero-section">
         {/* IMAGE: hero background, 1920 x 900 */}
         <div className="hero-placeholder-bg" />
@@ -335,19 +341,22 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* SECTION 2: WELCOME INTRO */}
+      {/* SECTION 2: WELCOME INTRO (ASYMMETRICAL IMAGE & TEXT SIDE-BY-SIDE) */}
       <section className="section-padding bg-ivory">
         <div className="container">
           <div className="welcome-grid">
             {/* Image Side with Gold Offset Frame */}
-            <div className="welcome-image-wrap">
+            <div className="welcome-image-wrap reveal reveal-left">
               <div className="welcome-gold-frame" />
               <div className="welcome-image-box">
-                {/* IMAGE: One photo beside this text (reception, styling chairs or team at work), size 800 x 900 px */}
+                {/* IMAGE: One photo beside this text, size 800 x 900 px */}
                 <div className="image-placeholder" style={{ height: '100%', minHeight: '400px', background: 'radial-gradient(circle at center, #ffffff 0%, #faedf0 100%)' }}>
                   <img
                     src={siteConfig.logo}
                     alt={siteConfig.name}
+                    loading="lazy"
+                    width="180"
+                    height="180"
                     style={{
                       width: '180px',
                       height: '180px',
@@ -371,7 +380,7 @@ export default function HomePage() {
             </div>
 
             {/* Text Side */}
-            <div className="welcome-text">
+            <div className="welcome-text reveal reveal-right">
               <div className="section-header text-left" style={{ marginBottom: '24px' }}>
                 <span className="section-eyebrow">About Our Parlour</span>
                 <h2 className="section-title">Welcome to {siteConfig.rawName}</h2>
@@ -397,10 +406,10 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* SECTION 3: WHY CHOOSE US */}
+      {/* SECTION 3: WHY CHOOSE US (ICON ROW WITH THIN DIVIDERS) */}
       <section className="section-padding bg-blush">
         <div className="container">
-          <div className="section-header">
+          <div className="section-header reveal reveal-up">
             <span className="section-eyebrow">Our Commitment</span>
             <h2 className="section-title">Why Women Choose {siteConfig.rawName}</h2>
             <div className="section-divider" />
@@ -409,9 +418,9 @@ export default function HomePage() {
             </p>
           </div>
 
-          <div className="features-grid">
+          <div className="icon-feature-row cols-6 reveal reveal-up">
             {featuresList.map((item, idx) => (
-              <div key={idx} className="feature-card">
+              <div key={idx} className="icon-feature-item">
                 <div className="icon-circle">{item.icon}</div>
                 <h3>{item.title}</h3>
                 <p>{item.desc}</p>
@@ -421,10 +430,10 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* SECTION 4: OUR SERVICES */}
+      {/* SECTION 4: OUR SERVICES (THE ONE CARD GRID ON THIS PAGE) */}
       <section className="section-padding bg-ivory">
         <div className="container">
-          <div className="section-header">
+          <div className="section-header reveal reveal-up">
             <span className="section-eyebrow">What We Offer</span>
             <h2 className="section-title">Our Services</h2>
             <div className="section-divider" />
@@ -433,11 +442,11 @@ export default function HomePage() {
             </p>
           </div>
 
-          <div className="services-grid">
+          <div className="services-grid reveal reveal-stagger">
             {servicePreviews.map((service, index) => (
               <div key={index} className="service-card">
                 <div className="service-card-media">
-                  {/* IMAGE: One image on top of each of the 6 service cards: makeup, hair, facial, hair removal, massage, mani-pedi. Each 600 x 450 px */}
+                  {/* IMAGE: One image on top of each of the 6 service cards: makeup, hair, facial, hair removal, massage, mani-pedi */}
                   <div className="image-placeholder">
                     <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
                     <span className="placeholder-label">Add image here</span>
@@ -457,7 +466,7 @@ export default function HomePage() {
             ))}
           </div>
 
-          <div style={{ textAlign: 'center' }}>
+          <div style={{ textAlign: 'center' }} className="reveal reveal-up">
             <Link href="/services" className="btn btn-primary">
               View All Services
             </Link>
@@ -465,10 +474,10 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* SECTION 5: POPULAR PACKAGES */}
+      {/* SECTION 5: POPULAR PACKAGES (MENU-STYLE PRICE LIST WITH DOTTED LINES) */}
       <section className="section-padding bg-blush">
         <div className="container">
-          <div className="section-header">
+          <div className="section-header reveal reveal-up">
             <span className="section-eyebrow">Curated Specials</span>
             <h2 className="section-title">Popular Packages</h2>
             <div className="section-divider" />
@@ -477,33 +486,40 @@ export default function HomePage() {
             </p>
           </div>
 
-          <div className="packages-grid">
-            {popularPackages.map((pkg, idx) => (
-              <div key={idx} className={`package-card ${pkg.popular ? 'popular' : ''}`}>
-                {pkg.popular && <div className="popular-ribbon">Most Popular</div>}
-                <h3 className="package-title">{pkg.name}</h3>
-                <div className="package-price-wrap">
-                  <span className="package-price">{pkg.price}</span>
+          <div className="menu-price-container reveal reveal-up">
+            <div className="menu-price-list">
+              {popularPackages.map((pkg, idx) => (
+                <div key={idx} className="menu-price-item">
+                  <div className="menu-price-header">
+                    <span className="menu-price-name">
+                      {pkg.name}
+                      {pkg.popular && <span className="menu-price-badge">Most Popular</span>}
+                    </span>
+                    <span className="menu-price-dots" />
+                    <span className="menu-price-val">{pkg.price}</span>
+                  </div>
+                  <div className="menu-price-details">
+                    <p className="menu-price-desc">
+                      <strong>Includes: </strong>
+                      {pkg.inclusions.join(' • ')}
+                    </p>
+                    <Link
+                      href="/contact"
+                      className={`btn ${pkg.popular ? 'btn-primary' : 'btn-secondary'}`}
+                      style={{ padding: '8px 20px', fontSize: '0.88rem' }}
+                    >
+                      Book Package
+                    </Link>
+                  </div>
                 </div>
-                <ul className="package-inclusions">
-                  {pkg.inclusions.map((inc, i) => (
-                    <li key={i}>
-                      <svg viewBox="0 0 24 24" fill="none" strokeWidth="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-                      <span>{inc}</span>
-                    </li>
-                  ))}
-                </ul>
-                <Link href="/contact" className={`btn ${pkg.popular ? 'btn-primary' : 'btn-secondary'} btn-block`}>
-                  Book Package
-                </Link>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
       </section>
 
-      {/* SECTION 6: COUNTERS */}
-      <section className="counters-section" ref={countersRef}>
+      {/* SECTION 6: COUNTERS (MINIMALIST HORIZONTAL STAT STRIP) */}
+      <section className="counters-section reveal reveal-up" ref={countersRef}>
         <div className="container">
           <div className="section-header" style={{ marginBottom: '40px' }}>
             <h2 className="section-title" style={{ color: 'var(--white)' }}>Our Work in Numbers</h2>
@@ -531,10 +547,10 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* SECTION 7: GALLERY PREVIEW */}
+      {/* SECTION 7: GALLERY PREVIEW (DYNAMIC STAGGERED MASONRY GRID) */}
       <section className="section-padding bg-ivory">
         <div className="container">
-          <div className="section-header">
+          <div className="section-header reveal reveal-up">
             <span className="section-eyebrow">Portfolio</span>
             <h2 className="section-title">Our Recent Work</h2>
             <div className="section-divider" />
@@ -543,10 +559,9 @@ export default function HomePage() {
             </p>
           </div>
 
-          {/* 8 portrait photos in a 4-column grid (2 columns on mobile), each 768 x 960 px */}
-          <div className="home-gallery-grid">
+          <div className="masonry-showcase reveal reveal-stagger">
             {[...Array(8)].map((_, idx) => (
-              <div key={idx} className="home-gallery-tile">
+              <div key={idx} className="masonry-item">
                 {/* IMAGE: portrait photo, 768 x 960 px */}
                 <div className="image-placeholder">
                   <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
@@ -557,7 +572,7 @@ export default function HomePage() {
             ))}
           </div>
 
-          <div style={{ textAlign: 'center' }}>
+          <div style={{ textAlign: 'center', marginTop: '36px' }} className="reveal reveal-up">
             <Link href="/gallery" className="btn btn-secondary">
               View Full Gallery
             </Link>
@@ -565,19 +580,19 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* SECTION 8: HOW BOOKING WORKS */}
+      {/* SECTION 8: HOW BOOKING WORKS (NUMBERED HORIZONTAL TIMELINE) */}
       <section className="section-padding bg-white">
         <div className="container">
-          <div className="section-header">
+          <div className="section-header reveal reveal-up">
             <span className="section-eyebrow">Simple Process</span>
             <h2 className="section-title">Book Your Appointment in 3 Easy Steps</h2>
             <div className="section-divider" />
           </div>
 
-          <div className="steps-row">
+          <div className="timeline-track reveal reveal-up">
             {bookingSteps.map((step) => (
-              <div key={step.num} className="step-card">
-                <div className="step-number-circle">{step.num}</div>
+              <div key={step.num} className="timeline-step">
+                <div className="timeline-num">{step.num}</div>
                 <h3>{step.title}</h3>
                 <p>{step.text}</p>
               </div>
@@ -586,51 +601,76 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* SECTION 9: CLIENT REVIEWS */}
+      {/* SECTION 9: CLIENT REVIEWS (LARGE FEATURED QUOTE SPOTLIGHT WITH SLIDER) */}
       <section className="section-padding bg-blush">
         <div className="container">
-          <div className="section-header">
+          <div className="section-header reveal reveal-up">
             <span className="section-eyebrow">Client Love</span>
             <h2 className="section-title">What Our Clients Say</h2>
             <div className="section-divider" />
           </div>
 
-          <div className="reviews-grid">
-            {reviewsList.map((review, idx) => (
-              <div key={idx} className="review-card">
-                <div className="review-quote-icon">“</div>
-                <p className="review-text">"{review.text}"</p>
-                <div className="review-stars">
-                  {[...Array(5)].map((_, s) => (
-                    <svg key={s} viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-                  ))}
-                </div>
-                <div className="review-client">
-                  {/* IMAGE: A small round photo of each client, each 120 x 120 px */}
-                  <div className="review-avatar-placeholder">
-                    {review.name.charAt(0)}
-                  </div>
-                  <div>
-                    <div className="review-client-name">{review.name}</div>
-                    <div className="review-client-service">{review.service}</div>
-                  </div>
-                </div>
+          <div className="quote-spotlight reveal reveal-up">
+            <div className="quote-spotlight-mark">“</div>
+            <p className="quote-spotlight-text">"{currentReview.text}"</p>
+            <div className="quote-spotlight-stars">
+              {[...Array(5)].map((_, s) => (
+                <svg key={s} viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              ))}
+            </div>
+            <div className="quote-spotlight-author">
+              <div className="quote-spotlight-avatar">
+                {currentReview.name.charAt(0)}
               </div>
-            ))}
+              <div style={{ textAlign: 'left' }}>
+                <div className="quote-spotlight-name">{currentReview.name}</div>
+                <div className="quote-spotlight-service">{currentReview.service}</div>
+              </div>
+            </div>
+
+            <div className="quote-spotlight-controls">
+              <button
+                type="button"
+                className="quote-nav-btn"
+                onClick={prevReview}
+                aria-label="Previous review"
+              >
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="15 18 9 12 15 6"/></svg>
+              </button>
+              <div className="quote-dots">
+                {reviewsList.map((_, idx) => (
+                  <button
+                    key={idx}
+                    type="button"
+                    className={`quote-dot ${activeReview === idx ? 'active' : ''}`}
+                    onClick={() => setActiveReview(idx)}
+                    aria-label={`Go to review ${idx + 1}`}
+                  />
+                ))}
+              </div>
+              <button
+                type="button"
+                className="quote-nav-btn"
+                onClick={nextReview}
+                aria-label="Next review"
+              >
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="9 18 15 12 9 6"/></svg>
+              </button>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* SECTION 10: FREQUENTLY ASKED QUESTIONS */}
+      {/* SECTION 10: FREQUENTLY ASKED QUESTIONS (ACCORDION LIST) */}
       <section className="section-padding bg-ivory">
         <div className="container">
-          <div className="section-header">
+          <div className="section-header reveal reveal-up">
             <span className="section-eyebrow">Common Queries</span>
             <h2 className="section-title">Frequently Asked Questions</h2>
             <div className="section-divider" />
           </div>
 
-          <div className="faq-list">
+          <div className="faq-list reveal reveal-up">
             {homeFaqs.map((faq, idx) => {
               const isOpen = openFaq === idx;
               return (
@@ -657,8 +697,8 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* SECTION 11: FINAL CALL TO ACTION */}
-      <section className="cta-band">
+      {/* SECTION 11: FINAL CALL TO ACTION (FULL-WIDTH BANNER STRIP) */}
+      <section className="cta-band reveal reveal-up">
         <div className="container">
           <div className="cta-band-content">
             <h2>Ready for Your New Look?</h2>

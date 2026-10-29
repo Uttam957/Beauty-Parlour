@@ -208,10 +208,10 @@ export default function AcademyPage() {
         </div>
       </div>
 
-      {/* SECTION 2: ABOUT THE ACADEMY */}
+      {/* SECTION 2: ABOUT THE ACADEMY (EDITORIAL LEAD INTRO) */}
       <section className="section-padding bg-ivory">
         <div className="container">
-          <div className="services-intro-box">
+          <div className="services-intro-box reveal reveal-up">
             Our academy is for students, homemakers and working women who want to learn professional beauty skills.
             Classes are practical and small-batch, so every student gets personal attention and plenty of practice on
             models.
@@ -219,72 +219,78 @@ export default function AcademyPage() {
         </div>
       </section>
 
-      {/* SECTION 3: COURSES */}
+      {/* SECTION 3: COURSES (MENU-STYLE COURSE CATALOG WITH DOTTED LINES & BADGES) */}
       <section className="section-padding bg-blush">
         <div className="container">
-          <div className="section-header">
+          <div className="section-header reveal reveal-up">
             <span className="section-eyebrow">Professional Curriculum</span>
             <h2 className="section-title">Courses</h2>
             <div className="section-divider" />
           </div>
 
-          <div className="courses-grid">
-            {coursesList.map((course, idx) => (
-              <div key={idx} className="course-card">
-                <div className="course-top-strip" />
-                <div className="course-card-body">
-                  <div className="course-header-row">
-                    <h3 className="course-title">{course.name}</h3>
-                    <span className="course-duration-badge">{course.duration}</span>
+          <div className="menu-price-container reveal reveal-up">
+            <div className="menu-price-list">
+              {coursesList.map((course, idx) => (
+                <div key={idx} className="menu-price-item">
+                  <div className="menu-price-header">
+                    <span className="menu-price-name">
+                      {course.name}
+                      <span className="menu-price-badge">{course.duration}</span>
+                    </span>
+                    <span className="menu-price-dots" />
+                    <span className="menu-price-val">{course.fees}</span>
                   </div>
-                  <div className="course-fee">{course.fees}</div>
-                  <div className="course-learn-title">What you learn</div>
-                  <p className="course-learn-text">{course.learn}</p>
-                  <button
-                    type="button"
-                    onClick={() => handleEnquireClick(course.name)}
-                    className="btn btn-secondary btn-block"
-                  >
-                    Enquire Now
-                  </button>
+                  <div className="menu-price-details">
+                    <p className="menu-price-desc">
+                      <strong>What you learn: </strong>
+                      {course.learn}
+                    </p>
+                    <button
+                      type="button"
+                      onClick={() => handleEnquireClick(course.name)}
+                      className="btn btn-secondary"
+                      style={{ padding: '8px 20px', fontSize: '0.88rem' }}
+                    >
+                      Enquire Now
+                    </button>
+                  </div>
                 </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* SECTION 4: WHY LEARN WITH US (ICON ROW WITH THIN DIVIDERS) */}
+      <section className="section-padding bg-white">
+        <div className="container">
+          <div className="section-header reveal reveal-up">
+            <span className="section-eyebrow">Student Advantages</span>
+            <h2 className="section-title">Why Learn With Us</h2>
+            <div className="section-divider" />
+          </div>
+
+          <div className="icon-feature-row cols-6 reveal reveal-up">
+            {whyLearnPoints.map((point, idx) => (
+              <div key={idx} className="icon-feature-item">
+                <div className="icon-circle" style={{ width: '42px', height: '42px' }}>
+                  <svg viewBox="0 0 24 24" fill="none" strokeWidth="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                </div>
+                <h4>Advantage {idx + 1}</h4>
+                <p>{point}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* SECTION 4: WHY LEARN WITH US */}
-      <section className="section-padding bg-white">
-        <div className="container">
-          <div className="section-header">
-            <span className="section-eyebrow">Student Advantages</span>
-            <h2 className="section-title">Why Learn With Us</h2>
-            <div className="section-divider" />
-          </div>
-
-          <div className="checklist-card">
-            <ul className="tips-grid">
-              {whyLearnPoints.map((point, idx) => (
-                <li key={idx} className="tip-item">
-                  <div className="icon-circle" style={{ width: '36px', height: '36px' }}>
-                    <svg viewBox="0 0 24 24" fill="none" strokeWidth="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-                  </div>
-                  <span>{point}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-      </section>
-
-      {/* SECTION 5: WHO CAN JOIN */}
+      {/* SECTION 5: WHO CAN JOIN (FULL-WIDTH HIGHLIGHT STRIP) */}
       <section className="section-padding bg-ivory">
         <div className="container">
-          <div className="eligibility-box">
-            <span className="section-eyebrow">Eligibility</span>
-            <h3>Who Can Join</h3>
-            <p>
+          <div className="highlight-strip reveal reveal-up" style={{ maxWidth: '880px', margin: '0 auto', textAlign: 'center' }}>
+            <span className="section-eyebrow" style={{ display: 'block', marginBottom: '8px' }}>Eligibility</span>
+            <h3 style={{ marginBottom: '12px' }}>Who Can Join</h3>
+            <p style={{ fontSize: '1.05rem', color: 'var(--text)' }}>
               Any woman aged 16 and above, with basic reading skills. No previous experience is needed for beginner
               courses.
             </p>
@@ -292,19 +298,19 @@ export default function AcademyPage() {
         </div>
       </section>
 
-      {/* SECTION 6: ADMISSION PROCESS */}
+      {/* SECTION 6: ADMISSION PROCESS (NUMBERED HORIZONTAL TIMELINE) */}
       <section className="section-padding bg-white">
         <div className="container">
-          <div className="section-header">
+          <div className="section-header reveal reveal-up">
             <span className="section-eyebrow">How to Enroll</span>
             <h2 className="section-title">Admission Process</h2>
             <div className="section-divider" />
           </div>
 
-          <div className="steps-row" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))' }}>
+          <div className="timeline-track reveal reveal-up">
             {admissionSteps.map((step) => (
-              <div key={step.num} className="step-card">
-                <div className="step-number-circle">{step.num}</div>
+              <div key={step.num} className="timeline-step">
+                <div className="timeline-num">{step.num}</div>
                 <h3>{step.title}</h3>
                 <p>{step.text}</p>
               </div>
@@ -313,19 +319,19 @@ export default function AcademyPage() {
         </div>
       </section>
 
-      {/* SECTION 7: STUDENT RESULTS */}
+      {/* SECTION 7: STUDENT RESULTS (DYNAMIC STAGGERED MASONRY GRID - THE ONE VISUAL GRID) */}
       <section className="section-padding bg-blush">
         <div className="container">
-          <div className="section-header">
+          <div className="section-header reveal reveal-up">
             <span className="section-eyebrow">Student Success</span>
             <h2 className="section-title">Student Results</h2>
             <div className="section-divider" />
             <p className="section-subtitle">A glimpse of our students practicing and receiving their certifications.</p>
           </div>
 
-          <div className="results-grid">
+          <div className="masonry-showcase reveal reveal-stagger">
             {[...Array(6)].map((_, idx) => (
-              <div key={idx} className="result-card">
+              <div key={idx} className="masonry-item">
                 {/* IMAGE: 4 to 6 student photos or certificate photos, each 600 x 600 px */}
                 <div className="image-placeholder">
                   <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
@@ -338,16 +344,16 @@ export default function AcademyPage() {
         </div>
       </section>
 
-      {/* SECTION 8: FAQ */}
+      {/* SECTION 8: FAQ (ACCORDION LIST) */}
       <section className="section-padding bg-white">
         <div className="container">
-          <div className="section-header">
+          <div className="section-header reveal reveal-up">
             <span className="section-eyebrow">Course FAQs</span>
             <h2 className="section-title">Frequently Asked Questions</h2>
             <div className="section-divider" />
           </div>
 
-          <div className="faq-list">
+          <div className="faq-list reveal reveal-up">
             {academyFaqs.map((faq, idx) => {
               const isOpen = openFaq === idx;
               return (
@@ -374,125 +380,182 @@ export default function AcademyPage() {
         </div>
       </section>
 
-      {/* SECTION 9: ENQUIRY FORM */}
+      {/* SECTION 9: ENQUIRY FORM (SPLIT LAYOUT: INFO/PERKS LEFT + FORM RIGHT) */}
       <section className="section-padding bg-blush" id="academy-form">
         <div className="container">
-          <div className="section-header">
+          <div className="section-header reveal reveal-up">
             <span className="section-eyebrow">Apply Today</span>
             <h2 className="section-title">Course Enquiry</h2>
             <div className="section-divider" />
           </div>
 
-          <div className="service-form-wrapper">
-            {submitSuccess ? (
-              <div className="form-success-box">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <polyline points="20 6 9 17 4 12" />
-                </svg>
-                <span>Thank you. We have received your request and will call you shortly to confirm your course registration.</span>
+          <div className="contact-layout-grid reveal reveal-up">
+            {/* Left Column: Academy Counseling Details & Perks */}
+            <div className="contact-info-list">
+              <div className="highlight-strip" style={{ marginBottom: '20px' }}>
+                <h4 style={{ color: 'var(--plum)', marginBottom: '8px' }}>Personal Counseling Session</h4>
+                <p style={{ fontSize: '0.92rem', color: 'var(--muted)' }}>
+                  Visit our academy in {siteConfig.city} for a 1-on-1 counseling session with senior mentors to choose the right syllabus and batch timings for you.
+                </p>
               </div>
-            ) : null}
 
-            {submitError ? (
-              <div className="form-error" style={{ marginBottom: '16px', fontSize: '0.95rem' }}>
-                {submitError}
+              <div className="contact-info-card">
+                <div className="icon-circle">
+                  <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                </div>
+                <div>
+                  <div className="contact-card-label">Batch Schedules</div>
+                  <div className="contact-card-value">Morning (10 AM - 1 PM) & Afternoon (2 PM - 5 PM)</div>
+                  <div className="contact-card-sub">Flexible schedules available for working women</div>
+                </div>
               </div>
-            ) : null}
 
-            <form onSubmit={handleSubmit} noValidate>
-              <input
-                type="text"
-                name="website"
-                value={formData.website}
-                onChange={handleInputChange}
-                className="hidden-honeypot"
-                tabIndex="-1"
-                autoComplete="off"
-              />
+              <div className="contact-info-card">
+                <div className="icon-circle">
+                  <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                </div>
+                <div>
+                  <div className="contact-card-label">Direct Counselor Call</div>
+                  <a href={`tel:${siteConfig.phone.replace(/\s+/g, '')}`} className="contact-card-value">
+                    {siteConfig.phone}
+                  </a>
+                  <div className="contact-card-sub">Mon-Sun 10:00 AM - 8:00 PM</div>
+                </div>
+              </div>
 
-              <div className="form-group">
-                <label className="form-label" htmlFor="acad-name">Full Name *</label>
+              <div className="contact-info-card">
+                <div className="icon-circle" style={{ backgroundColor: '#E8F8EE', color: 'var(--whatsapp)' }}>
+                  <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/>
+                  </svg>
+                </div>
+                <div>
+                  <div className="contact-card-label">WhatsApp Syllabus Request</div>
+                  <a
+                    href={`https://wa.me/${siteConfig.whatsapp.replace(/\D/g, '')}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="contact-card-value"
+                  >
+                    Chat on WhatsApp
+                  </a>
+                  <div className="contact-card-sub">Get course PDF and fees breakdown</div>
+                </div>
+              </div>
+            </div>
+
+            {/* Right Column: Application Form */}
+            <div className="contact-form-card" style={{ padding: '36px 32px' }}>
+              {submitSuccess ? (
+                <div className="form-success-box">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <polyline points="20 6 9 17 4 12" />
+                  </svg>
+                  <span>Thank you. We have received your request and will call you shortly to confirm your course registration.</span>
+                </div>
+              ) : null}
+
+              {submitError ? (
+                <div className="form-error" style={{ marginBottom: '16px', fontSize: '0.95rem' }}>
+                  {submitError}
+                </div>
+              ) : null}
+
+              <form onSubmit={handleSubmit} noValidate>
                 <input
-                  id="acad-name"
                   type="text"
-                  name="name"
-                  value={formData.name}
+                  name="website"
+                  value={formData.website}
                   onChange={handleInputChange}
-                  className={`form-input ${formErrors.name ? 'has-error' : ''}`}
-                  placeholder="Enter your name"
-                  required
+                  className="hidden-honeypot"
+                  tabIndex="-1"
+                  autoComplete="off"
                 />
-                {formErrors.name && <div className="form-error">{formErrors.name}</div>}
-              </div>
 
-              <div className="form-grid-2">
                 <div className="form-group">
-                  <label className="form-label" htmlFor="acad-phone">Phone Number *</label>
+                  <label className="form-label" htmlFor="acad-name">Full Name *</label>
                   <input
-                    id="acad-phone"
-                    type="tel"
-                    name="phone"
-                    value={formData.phone}
+                    id="acad-name"
+                    type="text"
+                    name="name"
+                    value={formData.name}
                     onChange={handleInputChange}
-                    className={`form-input ${formErrors.phone ? 'has-error' : ''}`}
-                    placeholder="10-digit mobile number"
+                    className={`form-input ${formErrors.name ? 'has-error' : ''}`}
+                    placeholder="Enter your name"
                     required
                   />
-                  {formErrors.phone && <div className="form-error">{formErrors.phone}</div>}
+                  {formErrors.name && <div className="form-error">{formErrors.name}</div>}
+                </div>
+
+                <div className="form-grid-2">
+                  <div className="form-group">
+                    <label className="form-label" htmlFor="acad-phone">Phone Number *</label>
+                    <input
+                      id="acad-phone"
+                      type="tel"
+                      name="phone"
+                      value={formData.phone}
+                      onChange={handleInputChange}
+                      className={`form-input ${formErrors.phone ? 'has-error' : ''}`}
+                      placeholder="10-digit mobile number"
+                      required
+                    />
+                    {formErrors.phone && <div className="form-error">{formErrors.phone}</div>}
+                  </div>
+
+                  <div className="form-group">
+                    <label className="form-label" htmlFor="acad-email">Email (Optional)</label>
+                    <input
+                      id="acad-email"
+                      type="email"
+                      name="email"
+                      value={formData.email}
+                      onChange={handleInputChange}
+                      className="form-input"
+                      placeholder="your.email@example.com"
+                    />
+                  </div>
                 </div>
 
                 <div className="form-group">
-                  <label className="form-label" htmlFor="acad-email">Email (Optional)</label>
-                  <input
-                    id="acad-email"
-                    type="email"
-                    name="email"
-                    value={formData.email}
+                  <label className="form-label" htmlFor="acad-course">Select Course *</label>
+                  <select
+                    id="acad-course"
+                    name="course"
+                    value={formData.course}
                     onChange={handleInputChange}
-                    className="form-input"
-                    placeholder="your.email@example.com"
+                    className="form-select"
+                  >
+                    {coursesList.map((item, idx) => (
+                      <option key={idx} value={item.name}>
+                        {item.name} ({item.duration} - {item.fees})
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
+                <div className="form-group">
+                  <label className="form-label" htmlFor="acad-msg">Message / Batch Preference</label>
+                  <textarea
+                    id="acad-msg"
+                    name="message"
+                    value={formData.message}
+                    onChange={handleInputChange}
+                    rows="3"
+                    className="form-textarea"
+                    placeholder="Tell us about your timing preference or any questions..."
                   />
                 </div>
-              </div>
 
-              <div className="form-group">
-                <label className="form-label" htmlFor="acad-course">Select Course *</label>
-                <select
-                  id="acad-course"
-                  name="course"
-                  value={formData.course}
-                  onChange={handleInputChange}
-                  className="form-select"
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="btn btn-primary btn-block"
                 >
-                  {coursesList.map((item, idx) => (
-                    <option key={idx} value={item.name}>
-                      {item.name} ({item.duration} - {item.fees})
-                    </option>
-                  ))}
-                </select>
-              </div>
-
-              <div className="form-group">
-                <label className="form-label" htmlFor="acad-msg">Message / Batch Preference</label>
-                <textarea
-                  id="acad-msg"
-                  name="message"
-                  value={formData.message}
-                  onChange={handleInputChange}
-                  rows="3"
-                  className="form-textarea"
-                  placeholder="Tell us about your timing preference or any questions..."
-                />
-              </div>
-
-              <button
-                type="submit"
-                disabled={isSubmitting}
-                className="btn btn-primary btn-block"
-              >
-                {isSubmitting ? 'Submitting Application...' : 'Submit Course Enquiry'}
-              </button>
-            </form>
+                  {isSubmitting ? 'Submitting Application...' : 'Submit Course Enquiry'}
+                </button>
+              </form>
+            </div>
           </div>
         </div>
       </section>

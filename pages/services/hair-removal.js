@@ -139,12 +139,12 @@ export default function HairRemovalPage() {
             <div className="section-divider" />
           </div>
 
-          <div className="why-book-row" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))' }}>
+          <div className="icon-feature-row cols-4 reveal reveal-up">
             {whyHairRemoval.map((item, idx) => (
-              <div key={idx} className="why-book-item">
+              <div key={idx} className="icon-feature-item">
                 <div className="icon-circle">{item.icon}</div>
                 <h4>{item.title}</h4>
-                <p className="muted" style={{ fontSize: '0.925rem', marginBottom: 0 }}>{item.desc}</p>
+                <p>{item.desc}</p>
               </div>
             ))}
           </div>
@@ -160,25 +160,21 @@ export default function HairRemovalPage() {
             <div className="section-divider" />
           </div>
 
-          <div className="price-table-container">
-            <table className="price-table">
-              <thead>
-                <tr>
-                  <th>Service</th>
-                  <th className="price-col">Regular Wax</th>
-                  <th className="price-col">Rica / Brazilian Wax</th>
-                </tr>
-              </thead>
-              <tbody>
-                {waxingPrices.map((row, idx) => (
-                  <tr key={idx}>
-                    <td className="service-name">{row.service}</td>
-                    <td className="price-col">{row.regular}</td>
-                    <td className="price-col" style={{ color: 'var(--plum)' }}>{row.rica}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+          <div className="menu-price-container reveal reveal-up">
+            <div className="menu-price-list">
+              {waxingPrices.map((row, idx) => (
+                <div key={idx} className="menu-price-item">
+                  <div className="menu-price-header">
+                    <span className="menu-price-name">{row.service}</span>
+                    <span className="menu-price-dots" />
+                    <div className="menu-price-dual">
+                      <span className="menu-price-subval">Regular: <strong>{row.regular}</strong></span>
+                      <span className="menu-price-subval" style={{ color: 'var(--plum)' }}>Rica: <strong>{row.rica}</strong></span>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
@@ -192,23 +188,18 @@ export default function HairRemovalPage() {
             <div className="section-divider" />
           </div>
 
-          <div className="price-table-container">
-            <table className="price-table">
-              <thead>
-                <tr>
-                  <th>Service</th>
-                  <th className="price-col">Price</th>
-                </tr>
-              </thead>
-              <tbody>
-                {threadingPrices.map((row, idx) => (
-                  <tr key={idx}>
-                    <td className="service-name">{row.service}</td>
-                    <td className="price-col">{row.price}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+          <div className="menu-price-container reveal reveal-up">
+            <div className="menu-price-list">
+              {threadingPrices.map((row, idx) => (
+                <div key={idx} className="menu-price-item">
+                  <div className="menu-price-header">
+                    <span className="menu-price-name">{row.service}</span>
+                    <span className="menu-price-dots" />
+                    <span className="menu-price-val">{row.price}</span>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
@@ -222,25 +213,31 @@ export default function HairRemovalPage() {
             <div className="section-divider" />
           </div>
 
-          <div className="price-table-container">
-            <table className="price-table">
-              <thead>
-                <tr>
-                  <th>Feature</th>
-                  <th>Waxing</th>
-                  <th>Threading</th>
-                </tr>
-              </thead>
-              <tbody>
+          <div className="comparison-cards-grid reveal reveal-stagger">
+            <div className="comparison-card highlight">
+              <span className="comparison-card-badge">Popular Body Care</span>
+              <h3 className="comparison-card-title">Waxing Treatment</h3>
+              <ul className="comparison-card-list">
                 {comparisonData.map((row, idx) => (
-                  <tr key={idx}>
-                    <td className="service-name">{row.feature}</td>
-                    <td>{row.waxing}</td>
-                    <td>{row.threading}</td>
-                  </tr>
+                  <li key={idx} className="comparison-card-item">
+                    <span className="comparison-card-feature">{row.feature}</span>
+                    <span className="comparison-card-desc">{row.waxing}</span>
+                  </li>
                 ))}
-              </tbody>
-            </table>
+              </ul>
+            </div>
+
+            <div className="comparison-card">
+              <h3 className="comparison-card-title">Threading Technique</h3>
+              <ul className="comparison-card-list">
+                {comparisonData.map((row, idx) => (
+                  <li key={idx} className="comparison-card-item">
+                    <span className="comparison-card-feature">{row.feature}</span>
+                    <span className="comparison-card-desc">{row.threading}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
         </div>
       </section>
@@ -254,34 +251,49 @@ export default function HairRemovalPage() {
             <div className="section-divider" />
           </div>
 
-          <div className="vm-grid" style={{ marginBottom: '32px' }}>
-            <div className="checklist-card" style={{ maxWidth: '100%' }}>
-              <h3 style={{ fontSize: '1.25rem', marginBottom: '16px', color: 'var(--plum)' }}>Before Waxing</h3>
-              <p style={{ color: 'var(--muted)', fontSize: '0.95rem' }}>
-                Let hair grow to about a quarter inch, and keep skin clean and dry before your visit.
-              </p>
+          <div className="checklist-strip reveal reveal-up" style={{ marginBottom: '32px' }}>
+            <div className="checklist-strip-item">
+              <div className="icon-circle">
+                <svg viewBox="0 0 24 24" fill="none" strokeWidth="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+              </div>
+              <div>
+                <strong style={{ display: 'block', color: 'var(--plum)', marginBottom: '4px' }}>Before Waxing</strong>
+                <span>Let hair grow to about a quarter inch, and keep skin clean and dry before your visit.</span>
+              </div>
             </div>
 
-            <div className="checklist-card" style={{ maxWidth: '100%' }}>
-              <h3 style={{ fontSize: '1.25rem', marginBottom: '16px', color: 'var(--plum)' }}>After Waxing</h3>
-              <ul className="package-inclusions">
-                <li>
-                  <svg viewBox="0 0 24 24" fill="none" strokeWidth="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-                  <span>Avoid sun, hot water, saunas and swimming for 24 hours.</span>
-                </li>
-                <li>
-                  <svg viewBox="0 0 24 24" fill="none" strokeWidth="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-                  <span>Avoid tight clothes and heavy creams on the area.</span>
-                </li>
-                <li>
-                  <svg viewBox="0 0 24 24" fill="none" strokeWidth="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-                  <span>Gently exfoliate after 2 to 3 days to prevent ingrown hairs.</span>
-                </li>
-              </ul>
+            <div className="checklist-strip-item">
+              <div className="icon-circle">
+                <svg viewBox="0 0 24 24" fill="none" strokeWidth="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+              </div>
+              <div>
+                <strong style={{ display: 'block', color: 'var(--plum)', marginBottom: '4px' }}>After Waxing: Protection</strong>
+                <span>Avoid sun, hot water, saunas and swimming for 24 hours.</span>
+              </div>
+            </div>
+
+            <div className="checklist-strip-item">
+              <div className="icon-circle">
+                <svg viewBox="0 0 24 24" fill="none" strokeWidth="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+              </div>
+              <div>
+                <strong style={{ display: 'block', color: 'var(--plum)', marginBottom: '4px' }}>After Waxing: Comfort</strong>
+                <span>Avoid tight clothes and heavy creams on the area.</span>
+              </div>
+            </div>
+
+            <div className="checklist-strip-item">
+              <div className="icon-circle">
+                <svg viewBox="0 0 24 24" fill="none" strokeWidth="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+              </div>
+              <div>
+                <strong style={{ display: 'block', color: 'var(--plum)', marginBottom: '4px' }}>Exfoliation Maintenance</strong>
+                <span>Gently exfoliate after 2 to 3 days to prevent ingrown hairs.</span>
+              </div>
             </div>
           </div>
 
-          <div className="notice-box">
+          <div className="notice-box reveal reveal-up">
             <svg className="notice-icon" viewBox="0 0 24 24" fill="none" strokeWidth="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
             <div className="notice-content">
               <h4>Please Note</h4>
@@ -300,7 +312,7 @@ export default function HairRemovalPage() {
             <div className="section-divider" />
           </div>
 
-          <div className="faq-list">
+          <div className="faq-list reveal reveal-up">
             {hairRemovalFaqs.map((faq, idx) => {
               const isOpen = openFaq === idx;
               return (
@@ -328,7 +340,7 @@ export default function HairRemovalPage() {
       </section>
 
       {/* SECTION 8: CALL TO ACTION */}
-      <section className="cta-band">
+      <section className="cta-band reveal reveal-up">
         <div className="container">
           <div className="cta-band-content">
             <h2>Ready for Smooth, Radiant Skin?</h2>

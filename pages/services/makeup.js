@@ -218,7 +218,7 @@ export default function MakeupPage() {
       <section className="section-padding bg-ivory">
         <div className="container">
           <div className="service-intro-grid">
-            <div className="service-intro-text">
+            <div className="service-intro-text reveal reveal-left">
               <div className="section-header text-left" style={{ marginBottom: '24px' }}>
                 <span className="section-eyebrow">Artistry & Technique</span>
                 <h2 className="section-title">Makeup That Enhances You</h2>
@@ -235,7 +235,7 @@ export default function MakeupPage() {
               </p>
             </div>
 
-            <div className="service-intro-media">
+            <div className="service-intro-media reveal reveal-right">
               {/* IMAGE: One large photo beside the introduction (makeup artist with a bride), size 800 x 800 px */}
               <div className="image-placeholder">
                 <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
@@ -256,20 +256,25 @@ export default function MakeupPage() {
             <div className="section-divider" />
           </div>
 
-          <div className="occasions-grid">
+          <div className="zigzag-showcase reveal reveal-up">
             {occasionBlocks.map((item, idx) => (
-              <div key={idx} className="occasion-card">
-                {item.hasImage && (
-                  <div className="occasion-media">
-                    {/* IMAGE: One photo each for Bridal, Party and Engagement makeup, shown beside their description, each 700 x 700 px */}
+              <div key={idx} className="zigzag-row">
+                <div className="zigzag-media">
+                  {item.hasImage ? (
                     <div className="image-placeholder">
                       <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-                      <span className="placeholder-label">{item.title} image</span>
+                      <span className="placeholder-label">{item.title}</span>
                       <span className="placeholder-dim">700 x 700 px</span>
                     </div>
-                  </div>
-                )}
-                <div className="occasion-body">
+                  ) : (
+                    <div className="image-placeholder" style={{ background: 'var(--blush)' }}>
+                      <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                      <span className="placeholder-label">{item.title}</span>
+                    </div>
+                  )}
+                </div>
+                <div className="zigzag-text">
+                  <span className="section-eyebrow">Look 0{idx + 1}</span>
                   <h3>{item.title}</h3>
                   <p>{item.desc}</p>
                 </div>
@@ -288,10 +293,10 @@ export default function MakeupPage() {
             <div className="section-divider" />
           </div>
 
-          <div className="process-timeline">
+          <div className="timeline-track reveal reveal-up">
             {processSteps.map((step) => (
-              <div key={step.num} className="process-step-card">
-                <div className="process-step-num">{step.num}</div>
+              <div key={step.num} className="timeline-step">
+                <div className="timeline-num">{step.num}</div>
                 <h4>{step.title}</h4>
                 <p>{step.text}</p>
               </div>
@@ -310,7 +315,7 @@ export default function MakeupPage() {
           </div>
 
           {/* Category Tabs */}
-          <div className="gallery-filters" style={{ marginBottom: '32px' }}>
+          <div className="gallery-filters reveal reveal-up" style={{ marginBottom: '32px' }}>
             {categories.map((cat) => (
               <button
                 key={cat}
@@ -323,26 +328,22 @@ export default function MakeupPage() {
             ))}
           </div>
 
-          <div className="price-table-container">
-            <table className="price-table">
-              <thead>
-                <tr>
-                  <th>Category</th>
-                  <th>Service</th>
-                  <th className="price-col">Price</th>
-                </tr>
-              </thead>
-              <tbody>
-                {filteredPrices.map((row, idx) => (
-                  <tr key={idx}>
-                    <td><span className="service-card-chip" style={{ position: 'static' }}>{row.category}</span></td>
-                    <td className="service-name">{row.service}</td>
-                    <td className="price-col">{row.price}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-            <div className="price-note">
+          <div className="menu-price-container reveal reveal-up">
+            <div className="menu-price-list">
+              {filteredPrices.map((row, idx) => (
+                <div key={idx} className="menu-price-item">
+                  <div className="menu-price-header">
+                    <span className="menu-price-name">
+                      {row.service}
+                      <span className="menu-price-badge">{row.category}</span>
+                    </span>
+                    <span className="menu-price-dots" />
+                    <span className="menu-price-val">{row.price}</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+            <div className="price-note" style={{ textAlign: 'center', marginTop: '24px' }}>
               Prices vary with the artist, products and home-visit distance. Confirm the final price when booking.
             </div>
           </div>
@@ -358,17 +359,15 @@ export default function MakeupPage() {
             <div className="section-divider" />
           </div>
 
-          <div className="checklist-card">
-            <ul className="tips-grid">
-              {bridalTips.map((tip, idx) => (
-                <li key={idx} className="tip-item">
-                  <div className="icon-circle" style={{ width: '36px', height: '36px' }}>
-                    <svg viewBox="0 0 24 24" fill="none" strokeWidth="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-                  </div>
-                  <span>{tip}</span>
-                </li>
-              ))}
-            </ul>
+          <div className="checklist-strip reveal reveal-up">
+            {bridalTips.map((tip, idx) => (
+              <div key={idx} className="checklist-strip-item">
+                <div className="icon-circle">
+                  <svg viewBox="0 0 24 24" fill="none" strokeWidth="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                </div>
+                <span>{tip}</span>
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -382,10 +381,10 @@ export default function MakeupPage() {
             <div className="section-divider" />
           </div>
 
-          <div className="service-work-grid">
-            {[...Array(14)].map((_, idx) => (
-              <div key={idx} className="service-work-item">
-                {/* IMAGE: 12 to 14 photos in a masonry or 4-column grid, each 768 x 960 px */}
+          <div className="masonry-showcase reveal reveal-stagger">
+            {[...Array(12)].map((_, idx) => (
+              <div key={idx} className="masonry-item">
+                {/* IMAGE: 12 photos in a masonry grid, each 768 x 960 px */}
                 <div className="image-placeholder">
                   <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
                   <span className="placeholder-label">Add makeup photo</span>
@@ -406,7 +405,7 @@ export default function MakeupPage() {
             <div className="section-divider" />
           </div>
 
-          <div className="faq-list">
+          <div className="faq-list reveal reveal-up">
             {makeupFaqs.map((faq, idx) => {
               const isOpen = openFaq === idx;
               return (
@@ -442,131 +441,161 @@ export default function MakeupPage() {
             <div className="section-divider" />
           </div>
 
-          <div className="service-form-wrapper">
-            {submitSuccess ? (
-              <div className="form-success-box">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <polyline points="20 6 9 17 4 12" />
-                </svg>
-                <span>Thank you. We have received your request and will call you shortly to confirm your appointment.</span>
-              </div>
-            ) : null}
-
-            {submitError ? (
-              <div className="form-error" style={{ marginBottom: '16px', fontSize: '0.95rem' }}>
-                {submitError}
-              </div>
-            ) : null}
-
-            <form onSubmit={handleSubmit} noValidate>
-              {/* Anti-spam Honeypot Field */}
-              <input
-                type="text"
-                name="website"
-                value={formData.website}
-                onChange={handleInputChange}
-                className="hidden-honeypot"
-                tabIndex="-1"
-                autoComplete="off"
-              />
-
-              <div className="form-group">
-                <label className="form-label" htmlFor="makeup-name">Full Name *</label>
-                <input
-                  id="makeup-name"
-                  type="text"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleInputChange}
-                  className={`form-input ${formErrors.name ? 'has-error' : ''}`}
-                  placeholder="Your full name"
-                  required
-                />
-                {formErrors.name && <div className="form-error">{formErrors.name}</div>}
-              </div>
-
-              <div className="form-grid-2">
-                <div className="form-group">
-                  <label className="form-label" htmlFor="makeup-phone">Phone Number *</label>
-                  <input
-                    id="makeup-phone"
-                    type="tel"
-                    name="phone"
-                    value={formData.phone}
-                    onChange={handleInputChange}
-                    className={`form-input ${formErrors.phone ? 'has-error' : ''}`}
-                    placeholder="10-digit mobile number"
-                    required
-                  />
-                  {formErrors.phone && <div className="form-error">{formErrors.phone}</div>}
+          <div className="contact-layout-grid reveal reveal-up">
+            <div className="contact-info-col">
+              <div className="contact-card">
+                <div className="icon-circle">
+                  <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
                 </div>
-
-                <div className="form-group">
-                  <label className="form-label" htmlFor="makeup-email">Email (Optional)</label>
-                  <input
-                    id="makeup-email"
-                    type="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleInputChange}
-                    className="form-input"
-                    placeholder="your.email@example.com"
-                  />
-                </div>
+                <h3>Bridal Trial Session</h3>
+                <p>We recommend booking a trial session 4 to 6 weeks before your big day to test hairstyles and foundation shades.</p>
               </div>
 
-              <div className="form-grid-2">
-                <div className="form-group">
-                  <label className="form-label" htmlFor="makeup-service">Select Makeup Look *</label>
-                  <select
-                    id="makeup-service"
-                    name="service"
-                    value={formData.service}
+              <div className="contact-card">
+                <div className="icon-circle">
+                  <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                </div>
+                <h3>On-Venue Service</h3>
+                <p>Home and venue visits are available across {siteConfig.city} and surrounding areas for weddings and group party bookings.</p>
+              </div>
+
+              <div className="contact-card">
+                <div className="icon-circle">
+                  <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 14 14"/></svg>
+                </div>
+                <h3>Instant Confirmation</h3>
+                <p>Need urgent booking? Call us directly at <a href={`tel:${siteConfig.phone.replace(/\s+/g, '')}`} style={{ color: 'var(--rose)', fontWeight: 600 }}>{siteConfig.phone}</a>.</p>
+              </div>
+            </div>
+
+            <div className="contact-form-col">
+              <div className="service-form-wrapper" style={{ margin: 0, maxWidth: '100%' }}>
+                {submitSuccess ? (
+                  <div className="form-success-box">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <polyline points="20 6 9 17 4 12" />
+                    </svg>
+                    <span>Thank you. We have received your request and will call you shortly to confirm your appointment.</span>
+                  </div>
+                ) : null}
+
+                {submitError ? (
+                  <div className="form-error" style={{ marginBottom: '16px', fontSize: '0.95rem' }}>
+                    {submitError}
+                  </div>
+                ) : null}
+
+                <form onSubmit={handleSubmit} noValidate>
+                  {/* Anti-spam Honeypot Field */}
+                  <input
+                    type="text"
+                    name="website"
+                    value={formData.website}
                     onChange={handleInputChange}
-                    className="form-select"
+                    className="hidden-honeypot"
+                    tabIndex="-1"
+                    autoComplete="off"
+                  />
+
+                  <div className="form-group">
+                    <label className="form-label" htmlFor="makeup-name">Full Name *</label>
+                    <input
+                      id="makeup-name"
+                      type="text"
+                      name="name"
+                      value={formData.name}
+                      onChange={handleInputChange}
+                      className={`form-input ${formErrors.name ? 'has-error' : ''}`}
+                      placeholder="Your full name"
+                      required
+                    />
+                    {formErrors.name && <div className="form-error">{formErrors.name}</div>}
+                  </div>
+
+                  <div className="form-grid-2">
+                    <div className="form-group">
+                      <label className="form-label" htmlFor="makeup-phone">Phone Number *</label>
+                      <input
+                        id="makeup-phone"
+                        type="tel"
+                        name="phone"
+                        value={formData.phone}
+                        onChange={handleInputChange}
+                        className={`form-input ${formErrors.phone ? 'has-error' : ''}`}
+                        placeholder="10-digit mobile number"
+                        required
+                      />
+                      {formErrors.phone && <div className="form-error">{formErrors.phone}</div>}
+                    </div>
+
+                    <div className="form-group">
+                      <label className="form-label" htmlFor="makeup-email">Email (Optional)</label>
+                      <input
+                        id="makeup-email"
+                        type="email"
+                        name="email"
+                        value={formData.email}
+                        onChange={handleInputChange}
+                        className="form-input"
+                        placeholder="your.email@example.com"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="form-grid-2">
+                    <div className="form-group">
+                      <label className="form-label" htmlFor="makeup-service">Select Makeup Look *</label>
+                      <select
+                        id="makeup-service"
+                        name="service"
+                        value={formData.service}
+                        onChange={handleInputChange}
+                        className="form-select"
+                      >
+                        {makeupPrices.map((item, idx) => (
+                          <option key={idx} value={item.service}>
+                            {item.service} ({item.price})
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+
+                    <div className="form-group">
+                      <label className="form-label" htmlFor="makeup-date">Event Date</label>
+                      <input
+                        id="makeup-date"
+                        type="date"
+                        name="eventDate"
+                        value={formData.eventDate}
+                        onChange={handleInputChange}
+                        className="form-input"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="form-group">
+                    <label className="form-label" htmlFor="makeup-msg">Message / Venue Details</label>
+                    <textarea
+                      id="makeup-msg"
+                      name="message"
+                      value={formData.message}
+                      onChange={handleInputChange}
+                      rows="3"
+                      className="form-textarea"
+                      placeholder="Tell us about your event, venue location, or any specific styling requests..."
+                    />
+                  </div>
+
+                  <button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="btn btn-primary btn-block"
                   >
-                    {makeupPrices.map((item, idx) => (
-                      <option key={idx} value={item.service}>
-                        {item.service} ({item.price})
-                      </option>
-                    ))}
-                  </select>
-                </div>
-
-                <div className="form-group">
-                  <label className="form-label" htmlFor="makeup-date">Event Date</label>
-                  <input
-                    id="makeup-date"
-                    type="date"
-                    name="eventDate"
-                    value={formData.eventDate}
-                    onChange={handleInputChange}
-                    className="form-input"
-                  />
-                </div>
+                    {isSubmitting ? 'Sending Request...' : 'Send Enquiry'}
+                  </button>
+                </form>
               </div>
-
-              <div className="form-group">
-                <label className="form-label" htmlFor="makeup-msg">Message / Venue Details</label>
-                <textarea
-                  id="makeup-msg"
-                  name="message"
-                  value={formData.message}
-                  onChange={handleInputChange}
-                  rows="3"
-                  className="form-textarea"
-                  placeholder="Tell us about your event, venue location, or any specific styling requests..."
-                />
-              </div>
-
-              <button
-                type="submit"
-                disabled={isSubmitting}
-                className="btn btn-primary btn-block"
-              >
-                {isSubmitting ? 'Sending Request...' : 'Send Enquiry'}
-              </button>
-            </form>
+            </div>
           </div>
         </div>
       </section>

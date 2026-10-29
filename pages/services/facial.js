@@ -120,7 +120,7 @@ export default function FacialPage() {
       <section className="section-padding bg-ivory">
         <div className="container">
           <div className="service-intro-grid">
-            <div className="service-intro-text">
+            <div className="service-intro-text reveal reveal-left">
               <div className="section-header text-left" style={{ marginBottom: '24px' }}>
                 <span className="section-eyebrow">Personalized Skin Care</span>
                 <h2 className="section-title">Healthy Skin Starts With Care</h2>
@@ -133,7 +133,7 @@ export default function FacialPage() {
               </p>
             </div>
 
-            <div className="service-intro-media">
+            <div className="service-intro-media reveal reveal-right">
               {/* IMAGE: One photo beside this introduction (face mask or facial treatment), size 800 x 600 px */}
               <div className="image-placeholder">
                 <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
@@ -154,17 +154,16 @@ export default function FacialPage() {
             <div className="section-divider" />
           </div>
 
-          <div className="checklist-card">
-            <ul className="tips-grid">
-              {facialBenefits.map((benefit, idx) => (
-                <li key={idx} className="tip-item">
-                  <div className="icon-circle" style={{ width: '36px', height: '36px' }}>
-                    <svg viewBox="0 0 24 24" fill="none" strokeWidth="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-                  </div>
-                  <span>{benefit}</span>
-                </li>
-              ))}
-            </ul>
+          <div className="icon-feature-row cols-3 reveal reveal-up">
+            {facialBenefits.map((benefit, idx) => (
+              <div key={idx} className="icon-feature-item">
+                <div className="icon-circle">
+                  <svg viewBox="0 0 24 24" fill="none" strokeWidth="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                </div>
+                <h4>Advantage 0{idx + 1}</h4>
+                <p>{benefit}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -179,25 +178,22 @@ export default function FacialPage() {
             <p className="section-subtitle">Identify your skin's unique needs to select the most effective treatment.</p>
           </div>
 
-          <div className="price-table-container">
-            <table className="price-table">
-              <thead>
-                <tr>
-                  <th>Skin Type</th>
-                  <th>Common Signs</th>
-                  <th>Facial We Suggest</th>
-                </tr>
-              </thead>
-              <tbody>
-                {skinTypesData.map((row, idx) => (
-                  <tr key={idx}>
-                    <td className="service-name">{row.type}</td>
-                    <td>{row.signs}</td>
-                    <td style={{ color: 'var(--rose)', fontWeight: 600 }}>{row.suggested}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+          <div className="skin-types-grid reveal reveal-stagger">
+            {skinTypesData.map((row, idx) => (
+              <div key={idx} className="skin-type-card">
+                <div className="skin-type-header">
+                  <h3 className="skin-type-title">{row.type} Skin</h3>
+                  <span className="service-card-chip" style={{ position: 'static' }}>Type 0{idx + 1}</span>
+                </div>
+                <p className="skin-type-signs">
+                  <strong>Signs:</strong> {row.signs}
+                </p>
+                <div className="skin-type-suggested">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                  <span>Suggested: {row.suggested}</span>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -211,25 +207,21 @@ export default function FacialPage() {
             <div className="section-divider" />
           </div>
 
-          <div className="price-table-container">
-            <table className="price-table">
-              <thead>
-                <tr>
-                  <th>Treatment</th>
-                  <th>Best For</th>
-                  <th className="price-col">Price</th>
-                </tr>
-              </thead>
-              <tbody>
-                {facialPrices.map((item, idx) => (
-                  <tr key={idx}>
-                    <td className="service-name">{item.treatment}</td>
-                    <td style={{ color: 'var(--muted)' }}>{item.bestFor}</td>
-                    <td className="price-col">{item.price}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+          <div className="menu-price-container reveal reveal-up">
+            <div className="menu-price-list">
+              {facialPrices.map((item, idx) => (
+                <div key={idx} className="menu-price-item">
+                  <div className="menu-price-header">
+                    <span className="menu-price-name">{item.treatment}</span>
+                    <span className="menu-price-dots" />
+                    <span className="menu-price-val">{item.price}</span>
+                  </div>
+                  <div className="menu-price-details">
+                    <span className="menu-price-desc">Best for: {item.bestFor}</span>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
@@ -246,10 +238,10 @@ export default function FacialPage() {
             </p>
           </div>
 
-          <div className="process-timeline">
+          <div className="timeline-track reveal reveal-up">
             {facialSteps.map((step) => (
-              <div key={step.num} className="process-step-card">
-                <div className="process-step-num">{step.num}</div>
+              <div key={step.num} className="timeline-step">
+                <div className="timeline-num">{step.num}</div>
                 <h4>{step.title}</h4>
                 <p>{step.text}</p>
               </div>
@@ -267,17 +259,15 @@ export default function FacialPage() {
             <div className="section-divider" />
           </div>
 
-          <div className="checklist-card">
-            <ul className="tips-grid">
-              {aftercareTips.map((tip, idx) => (
-                <li key={idx} className="tip-item">
-                  <div className="icon-circle" style={{ width: '36px', height: '36px' }}>
-                    <svg viewBox="0 0 24 24" fill="none" strokeWidth="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-                  </div>
-                  <span>{tip}</span>
-                </li>
-              ))}
-            </ul>
+          <div className="checklist-strip reveal reveal-up">
+            {aftercareTips.map((tip, idx) => (
+              <div key={idx} className="checklist-strip-item">
+                <div className="icon-circle">
+                  <svg viewBox="0 0 24 24" fill="none" strokeWidth="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                </div>
+                <span>{tip}</span>
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -291,7 +281,7 @@ export default function FacialPage() {
             <div className="section-divider" />
           </div>
 
-          <div className="faq-list">
+          <div className="faq-list reveal reveal-up">
             {facialFaqs.map((faq, idx) => {
               const isOpen = openFaq === idx;
               return (
@@ -319,7 +309,7 @@ export default function FacialPage() {
       </section>
 
       {/* SECTION 9: CALL TO ACTION */}
-      <section className="cta-band">
+      <section className="cta-band reveal reveal-up">
         <div className="container">
           <div className="cta-band-content">
             <h2>Ready to Refresh Your Skin?</h2>

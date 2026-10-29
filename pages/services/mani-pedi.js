@@ -109,37 +109,30 @@ export default function ManiPediPage() {
             <div className="section-divider" />
           </div>
 
-          <div className="price-table-container">
-            <table className="price-table">
-              <thead>
-                <tr>
-                  <th>Service</th>
-                  <th>What is Included</th>
-                  <th className="price-col">Price</th>
-                </tr>
-              </thead>
-              <tbody>
-                {nailPrices.map((row, idx) => (
-                  <tr key={idx}>
-                    <td className="service-name">{row.service}</td>
-                    <td style={{ color: 'var(--muted)', fontSize: '0.92rem' }}>{row.included}</td>
-                    <td className="price-col">{row.price}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+          <div className="menu-price-container reveal reveal-up">
+            <div className="menu-price-list">
+              {nailPrices.map((row, idx) => (
+                <div key={idx} className="menu-price-item">
+                  <div className="menu-price-header">
+                    <span className="menu-price-name">{row.service}</span>
+                    <span className="menu-price-dots" />
+                    <span className="menu-price-val">{row.price}</span>
+                  </div>
+                  <div className="menu-price-details">
+                    <span className="menu-price-desc">{row.included}</span>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
 
           {/* SECTION 3: HYGIENE NOTE */}
-          <div className="notice-box" style={{ marginTop: '40px' }}>
-            <svg className="notice-icon" viewBox="0 0 24 24" fill="none" strokeWidth="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-            <div className="notice-content">
-              <h4>Hygiene for Nail Services</h4>
-              <p>
-                Tools are sterilised for each client, and files and buffers are single-use or cleaned before reuse.
-                Please tell us if you have cuts, fungal infection or diabetes before the service.
-              </p>
-            </div>
+          <div className="highlight-strip reveal reveal-up" style={{ marginTop: '48px' }}>
+            <h3>Hygiene for Nail Services</h3>
+            <p>
+              Tools are sterilised for each client, and files and buffers are single-use or cleaned before reuse.
+              Please tell us if you have cuts, fungal infection or diabetes before the service.
+            </p>
           </div>
         </div>
       </section>
@@ -153,7 +146,7 @@ export default function ManiPediPage() {
             <div className="section-divider" />
           </div>
 
-          <div className="occasions-grid">
+          <div className="occasions-grid reveal reveal-stagger">
             {otherServicesList.map((item, idx) => (
               <div key={idx} className="occasion-card">
                 <div className="occasion-media" style={{ aspectRatio: '16 / 9' }}>
@@ -183,7 +176,7 @@ export default function ManiPediPage() {
             <div className="section-divider" />
           </div>
 
-          <div className="faq-list">
+          <div className="faq-list reveal reveal-up">
             {maniPediFaqs.map((faq, idx) => {
               const isOpen = openFaq === idx;
               return (
@@ -211,7 +204,7 @@ export default function ManiPediPage() {
       </section>
 
       {/* SECTION 6: CALL TO ACTION */}
-      <section className="cta-band">
+      <section className="cta-band reveal reveal-up">
         <div className="container">
           <div className="cta-band-content">
             <h2>Pamper Your Hands & Feet Today</h2>
