@@ -51,6 +51,27 @@ export default function ContactPage() {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
+
+    if (name === 'name') {
+      // Only allow letters and spaces, max 50 characters
+      const lettersOnly = value.replace(/[^a-zA-Z\s]/g, '').slice(0, 50);
+      setFormData((prev) => ({ ...prev, [name]: lettersOnly }));
+      if (formErrors.name) {
+        setFormErrors((prev) => ({ ...prev, name: '' }));
+      }
+      return;
+    }
+
+    if (name === 'phone') {
+      // Only allow numbers (digits), max 10 digits
+      const digitsOnly = value.replace(/\D/g, '').slice(0, 10);
+      setFormData((prev) => ({ ...prev, [name]: digitsOnly }));
+      if (formErrors.phone) {
+        setFormErrors((prev) => ({ ...prev, phone: '' }));
+      }
+      return;
+    }
+
     setFormData((prev) => ({ ...prev, [name]: value }));
     if (formErrors[name]) {
       setFormErrors((prev) => ({ ...prev, [name]: '' }));
@@ -59,14 +80,52 @@ export default function ContactPage() {
 
   const validateForm = () => {
     const errors = {};
-    if (!formData.name.trim()) errors.name = 'Please provide your full name.';
-    const digitsOnly = formData.phone.replace(/\D/g, '');
-    const cleanPhone = digitsOnly.length > 10 && digitsOnly.startsWith('91') ? digitsOnly.slice(2) : digitsOnly;
-    if (!cleanPhone || cleanPhone.length !== 10) {
-      errors.phone = 'Please provide a valid 10-digit phone number.';
+
+    // 1. Name: Only characters (letters and spaces), max 50 chars, required
+    const trimmedName = formData.name.trim();
+    const nameRegex = /^[A-Za-z\s]+$/;
+    if (!trimmedName) {
+      errors.name = 'Please provide your full name.';
+    } else if (!nameRegex.test(trimmedName)) {
+      errors.name = 'Name can only contain characters (letters and spaces).';
+    } else if (trimmedName.length > 50) {
+      errors.name = 'Name must be maximum 50 characters only.';
     }
-    if (!formData.service) errors.service = 'Please select a service.';
-    if (!formData.eventDate) errors.eventDate = 'Please select your preferred date.';
+
+    // 2. Phone: Only numbers, exactly 10 digits, required
+    const digitsOnly = formData.phone.replace(/\D/g, '');
+    if (!digitsOnly) {
+      errors.phone = 'Please provide your phone number.';
+    } else if (digitsOnly.length !== 10) {
+      errors.phone = 'Phone number must be exactly 10 digits (numbers only).';
+    }
+
+    // 3. Email: Mandatory, must contain '@' and a valid domain format
+    const trimmedEmail = formData.email.trim();
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!trimmedEmail) {
+      errors.email = 'Please provide your email address.';
+    } else if (!trimmedEmail.includes('@')) {
+      errors.email = "Email must contain the '@' symbol.";
+    } else if (!emailRegex.test(trimmedEmail)) {
+      errors.email = "Please provide a valid email address (e.g. name@example.com).";
+    }
+
+    // 4. Service: Required
+    if (!formData.service || !formData.service.trim()) {
+      errors.service = 'Please select a service.';
+    }
+
+    // 5. Preferred Date: Required
+    if (!formData.eventDate) {
+      errors.eventDate = 'Please select your preferred date.';
+    }
+
+    // 6. Preferred Time: Required
+    if (!formData.preferredTime) {
+      errors.preferredTime = 'Please select your preferred time slot.';
+    }
+
     return errors;
   };
 
@@ -283,13 +342,16 @@ export default function ContactPage() {
                 />
 
                 <div className="form-group">
-                  <label className="form-label" htmlFor="contact-name">Full Name *</label>
+                  <label className="form-label" htmlFor="contact-name">
+                    Full Name * <span style={{ fontSize: '0.8rem', color: 'var(--muted)', fontWeight: 400 }}>(Characters only, max 50)</span>
+                  </label>
                   <input
                     id="contact-name"
                     type="text"
                     name="name"
                     value={formData.name}
                     onChange={handleInputChange}
+                    maxLength={50}
                     className={`form-input ${formErrors.name ? 'has-error' : ''}`}
                     placeholder="Enter your full name"
                     required
@@ -299,31 +361,39 @@ export default function ContactPage() {
 
                 <div className="form-grid-2">
                   <div className="form-group">
-                    <label className="form-label" htmlFor="contact-phone">Phone Number *</label>
+                    <label className="form-label" htmlFor="contact-phone">
+                      Phone Number * <span style={{ fontSize: '0.8rem', color: 'var(--muted)', fontWeight: 400 }}>(10 digits)</span>
+                    </label>
                     <input
                       id="contact-phone"
                       type="tel"
                       name="phone"
                       value={formData.phone}
                       onChange={handleInputChange}
+                      maxLength={10}
+                      inputMode="numeric"
                       className={`form-input ${formErrors.phone ? 'has-error' : ''}`}
-                      placeholder="10-digit phone number"
+                      placeholder="10-digit mobile number"
                       required
                     />
                     {formErrors.phone && <div className="form-error">{formErrors.phone}</div>}
                   </div>
 
                   <div className="form-group">
-                    <label className="form-label" htmlFor="contact-email">Email (Optional)</label>
+                    <label className="form-label" htmlFor="contact-email">
+                      Email Address *
+                    </label>
                     <input
                       id="contact-email"
                       type="email"
                       name="email"
                       value={formData.email}
                       onChange={handleInputChange}
-                      className="form-input"
+                      className={`form-input ${formErrors.email ? 'has-error' : ''}`}
                       placeholder="your.email@example.com"
+                      required
                     />
+                    {formErrors.email && <div className="form-error">{formErrors.email}</div>}
                   </div>
                 </div>
 
@@ -355,6 +425,7 @@ export default function ContactPage() {
                       id="contact-date"
                       type="date"
                       name="eventDate"
+                      min={new Date().toISOString().split('T')[0]}
                       value={formData.eventDate}
                       onChange={handleInputChange}
                       className={`form-input ${formErrors.eventDate ? 'has-error' : ''}`}
@@ -365,18 +436,20 @@ export default function ContactPage() {
                 </div>
 
                 <div className="form-group">
-                  <label className="form-label" htmlFor="contact-time">Preferred Time</label>
+                  <label className="form-label" htmlFor="contact-time">Preferred Time *</label>
                   <select
                     id="contact-time"
                     name="preferredTime"
                     value={formData.preferredTime}
                     onChange={handleInputChange}
-                    className="form-select"
+                    className={`form-select ${formErrors.preferredTime ? 'has-error' : ''}`}
+                    required
                   >
                     <option value="Morning">Morning (10:00 AM - 1:00 PM)</option>
                     <option value="Afternoon">Afternoon (1:00 PM - 5:00 PM)</option>
                     <option value="Evening">Evening (5:00 PM - 8:00 PM)</option>
                   </select>
+                  {formErrors.preferredTime && <div className="form-error">{formErrors.preferredTime}</div>}
                 </div>
 
                 <div className="form-group">

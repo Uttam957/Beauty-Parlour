@@ -41,31 +41,42 @@ export default async function handler(req, res) {
     const trimmedMessage = typeof message === 'string' ? message.trim() : '';
     const trimmedSource = typeof source === 'string' ? source.trim() : 'contact';
 
+    // Validate name: characters only (letters and spaces), max 50 chars
+    const nameRegex = /^[A-Za-z\s]+$/;
     if (!trimmedName) {
       return res.status(400).json({ success: false, message: 'Please provide your full name.' });
+    }
+    if (!nameRegex.test(trimmedName)) {
+      return res.status(400).json({ success: false, message: 'Name must contain only characters (letters and spaces).' });
+    }
+    if (trimmedName.length > 50) {
+      return res.status(400).json({ success: false, message: 'Name must not exceed 50 characters.' });
     }
 
     if (!trimmedPhone) {
       return res.status(400).json({ success: false, message: 'Please provide your phone number.' });
     }
 
-    // Validate 10-digit phone number (strip spaces, hyphens, and leading +91/0)
+    // Validate 10-digit phone number (numbers only)
     const digitsOnly = trimmedPhone.replace(/\D/g, '');
     const cleanPhone = digitsOnly.length > 10 && digitsOnly.startsWith('91') ? digitsOnly.slice(2) : digitsOnly;
     if (cleanPhone.length !== 10) {
       return res.status(400).json({
         success: false,
-        message: 'Please provide a valid 10-digit phone number.',
+        message: 'Phone number must be exactly 10 digits (numbers only).',
       });
     }
 
-    // Validate email format if provided
-    if (trimmedEmail) {
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      if (!emailRegex.test(trimmedEmail)) {
+    // Validate email format and mandatory '@' symbol
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (trimmedSource === 'contact' || trimmedEmail) {
+      if (!trimmedEmail) {
+        return res.status(400).json({ success: false, message: 'Please provide your email address.' });
+      }
+      if (!trimmedEmail.includes('@') || !emailRegex.test(trimmedEmail)) {
         return res.status(400).json({
           success: false,
-          message: 'Please provide a valid email address.',
+          message: "Email must contain '@' and be a valid email address.",
         });
       }
     }

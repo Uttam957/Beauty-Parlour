@@ -114,6 +114,21 @@ export default function MakeupPage() {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
+
+    if (name === 'name') {
+      const lettersOnly = value.replace(/[^a-zA-Z\s]/g, '').slice(0, 50);
+      setFormData((prev) => ({ ...prev, [name]: lettersOnly }));
+      if (formErrors.name) setFormErrors((prev) => ({ ...prev, name: '' }));
+      return;
+    }
+
+    if (name === 'phone') {
+      const digitsOnly = value.replace(/\D/g, '').slice(0, 10);
+      setFormData((prev) => ({ ...prev, [name]: digitsOnly }));
+      if (formErrors.phone) setFormErrors((prev) => ({ ...prev, phone: '' }));
+      return;
+    }
+
     setFormData((prev) => ({ ...prev, [name]: value }));
     if (formErrors[name]) {
       setFormErrors((prev) => ({ ...prev, [name]: '' }));
@@ -122,12 +137,31 @@ export default function MakeupPage() {
 
   const validateForm = () => {
     const errors = {};
-    if (!formData.name.trim()) errors.name = 'Please enter your full name.';
-    const digitsOnly = formData.phone.replace(/\D/g, '');
-    const cleanPhone = digitsOnly.length > 10 && digitsOnly.startsWith('91') ? digitsOnly.slice(2) : digitsOnly;
-    if (!cleanPhone || cleanPhone.length !== 10) {
-      errors.phone = 'Please enter a valid 10-digit phone number.';
+    const trimmedName = formData.name.trim();
+    const nameRegex = /^[A-Za-z\s]+$/;
+    if (!trimmedName) {
+      errors.name = 'Please enter your full name.';
+    } else if (!nameRegex.test(trimmedName)) {
+      errors.name = 'Name can only contain characters (letters and spaces).';
+    } else if (trimmedName.length > 50) {
+      errors.name = 'Name must be maximum 50 characters only.';
     }
+
+    const digitsOnly = formData.phone.replace(/\D/g, '');
+    if (!digitsOnly) {
+      errors.phone = 'Please enter your phone number.';
+    } else if (digitsOnly.length !== 10) {
+      errors.phone = 'Phone number must be exactly 10 digits (numbers only).';
+    }
+
+    if (formData.email && formData.email.trim()) {
+      const emailTrimmed = formData.email.trim();
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailTrimmed.includes('@') || !emailRegex.test(emailTrimmed)) {
+        errors.email = "Email must contain '@' and be a valid email address.";
+      }
+    }
+
     return errors;
   };
 
@@ -498,13 +532,16 @@ export default function MakeupPage() {
                   />
 
                   <div className="form-group">
-                    <label className="form-label" htmlFor="makeup-name">Full Name *</label>
+                    <label className="form-label" htmlFor="makeup-name">
+                      Full Name * <span style={{ fontSize: '0.8rem', color: 'var(--muted)', fontWeight: 400 }}>(Characters only, max 50)</span>
+                    </label>
                     <input
                       id="makeup-name"
                       type="text"
                       name="name"
                       value={formData.name}
                       onChange={handleInputChange}
+                      maxLength={50}
                       className={`form-input ${formErrors.name ? 'has-error' : ''}`}
                       placeholder="Your full name"
                       required
@@ -514,13 +551,17 @@ export default function MakeupPage() {
 
                   <div className="form-grid-2">
                     <div className="form-group">
-                      <label className="form-label" htmlFor="makeup-phone">Phone Number *</label>
+                      <label className="form-label" htmlFor="makeup-phone">
+                        Phone Number * <span style={{ fontSize: '0.8rem', color: 'var(--muted)', fontWeight: 400 }}>(10 digits)</span>
+                      </label>
                       <input
                         id="makeup-phone"
                         type="tel"
                         name="phone"
                         value={formData.phone}
                         onChange={handleInputChange}
+                        maxLength={10}
+                        inputMode="numeric"
                         className={`form-input ${formErrors.phone ? 'has-error' : ''}`}
                         placeholder="10-digit mobile number"
                         required
@@ -536,9 +577,10 @@ export default function MakeupPage() {
                         name="email"
                         value={formData.email}
                         onChange={handleInputChange}
-                        className="form-input"
+                        className={`form-input ${formErrors.email ? 'has-error' : ''}`}
                         placeholder="your.email@example.com"
                       />
+                      {formErrors.email && <div className="form-error">{formErrors.email}</div>}
                     </div>
                   </div>
 
